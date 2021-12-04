@@ -34,5 +34,9 @@ namespace EstateAgency
         public virtual DbSet<Feedback> Feedbacks { get; set; }
         public virtual DbSet<MultiFloorBuildingType> MultiFloorBuildingTypes { get; set; }
         public virtual DbSet<Requirement> Requirements { get; set; }
+        public virtual DbSet<BuildingType> BuildingTypes { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UsersRole> UsersRoles { get; set; }
     }
 }

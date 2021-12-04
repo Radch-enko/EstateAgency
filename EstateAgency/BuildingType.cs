@@ -12,31 +12,18 @@ namespace EstateAgency
     using System;
     using System.Collections.Generic;
     
-    public partial class Branch
+    public partial class BuildingType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Branch()
+        public BuildingType()
         {
-            this.Agreements = new HashSet<Agreement>();
-            this.Clients = new HashSet<Client>();
             this.Estates = new HashSet<Estate>();
-            this.Users = new HashSet<User>();
         }
     
         public int ID { get; set; }
-        public string Street { get; set; }
-        public string House { get; set; }
-        public string Room { get; set; }
-        public string Phone { get; set; }
-        public string Fax { get; set; }
+        public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Agreement> Agreements { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Client> Clients { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Estate> Estates { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User> Users { get; set; }
     }
 }

@@ -70,6 +70,9 @@
     <Compile Include="Branch.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
+    <Compile Include="BuildingType.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
     <Compile Include="Client.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
@@ -115,6 +118,15 @@
     </Compile>
     <Compile Include="Screens\Menu\Menu.xaml.cs">
       <DependentUpon>Menu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UsersRole.cs">
+      <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Page Include="DefaultButton.xaml">
       <Generator>MSBuild:Compile</Generator>

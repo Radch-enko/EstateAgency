@@ -21,7 +21,7 @@ namespace EstateAgency.Screens.Menu
     /// </summary>
     public partial class Menu : Page
     {
-        public Menu()
+        public Menu(User authorizedUser)
         {
             InitializeComponent();
         }

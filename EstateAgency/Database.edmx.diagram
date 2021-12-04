@@ -27,6 +27,13 @@
         <AssociationConnector Association="EstateAgencyModel.FK_Feedback_Estates" ManuallyRouted="false" />
         <AssociationConnector Association="EstateAgencyModel.FK_Requirements_EstateTypes" ManuallyRouted="false" />
         <AssociationConnector Association="EstateAgencyModel.FK_Requirements_MultiFloorBuildingType" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="EstateAgencyModel.BuildingType" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EstateAgencyModel.sysdiagram" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="EstateAgencyModel.User" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EstateAgencyModel.UsersRole" Width="1.5" PointX="8.75" PointY="0.75" />
+        <AssociationConnector Association="EstateAgencyModel.FK_Users_Branch" />
+        <AssociationConnector Association="EstateAgencyModel.FK_Estates_BuildingType" />
+        <AssociationConnector Association="EstateAgencyModel.FK_Users_UsersRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

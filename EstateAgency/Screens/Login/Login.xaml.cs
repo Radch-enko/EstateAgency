@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EstateAgency.Navigation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,16 +21,25 @@ namespace EstateAgency.Screens.Login
     /// </summary>
     public partial class Login : Page
     {
-        
         EstateAgencyEntities entities = EstateAgencyEntities.GetContext();
+        IEnumerable<User> users;
         public Login()
         {
             InitializeComponent();
+            users = entities.Users;
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-
+            IEnumerable<User> validEntries = users.ToList().Where(user => user.Login == LoginTextBox.Text && user.Password == PasswordTextBox.Text);
+            if (validEntries.Count() == 1)
+            {
+                _ = Navigator.frame.Navigate(new Menu.Menu(validEntries.FirstOrDefault()));
+            }
+            else
+            {
+                _ = MessageBox.Show("Неправильный логин или пароль", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

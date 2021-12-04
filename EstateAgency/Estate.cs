@@ -38,6 +38,7 @@ namespace EstateAgency
         public decimal Cost { get; set; }
         public System.DateTime Date { get; set; }
         public int BranchID { get; set; }
+        public Nullable<int> BuildingTypeID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Agreement> Agreements { get; set; }
@@ -46,5 +47,6 @@ namespace EstateAgency
         public virtual EstateType EstateType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Feedback> Feedbacks { get; set; }
+        public virtual BuildingType BuildingType { get; set; }
     }
 }
