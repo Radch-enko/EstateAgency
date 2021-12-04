@@ -1,0 +1,64 @@
+﻿<Page x:Class="EstateAgency.Screens.Clients.CreateClient.CreateClientForm"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EstateAgency.Screens.Clients.CreateClient"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="800"
+      Title="CreateClientForm"
+      Background="White">
+
+    <UniformGrid Margin="15" Columns="2" Rows="1">
+        <StackPanel Orientation="Vertical">
+            <Label Content="Адрес" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox Text="{Binding Address}" x:Name="AddressTextBox" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" />
+
+            <Label Content="Район" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <ComboBox x:Name="DistrictPicker" DisplayMemberPath="Name" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" />
+
+            <Label Content="Количество комнат" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox Text="{Binding RoomNumber}" x:Name="RoomNumberTextBox" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" />
+
+            <Label Content="Общая площадь" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox Text="{Binding TotalArea}" x:Name="TotalAreaTextBox" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" />
+
+            <Label Content="Площадь кухни" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox  Text="{Binding KitchenArea}" x:Name="KicthenAreaTextBox" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" />
+
+            <Label Content="Этаж" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox Text="{Binding Floor}" x:Name="FloorTextBox" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" />
+
+            <Label Content="Количество этажей в доме" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox Text="{Binding FloorNumber}" x:Name="FloorNumberTextBox" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" />
+
+            <Label Content="Тип недвижимости" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <ComboBox x:Name="EstateTypePicker" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" DisplayMemberPath="Name" />
+
+            <Label Content="Тип дома" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <ComboBox x:Name="BuildingTypePicker" DisplayMemberPath="Name"  HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" />
+        </StackPanel>
+        <StackPanel Orientation="Vertical">
+            <Label Content="Количество лоджий" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox Text="{Binding LoggiaNumber}" x:Name="LoqqiaNumberTextBox" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" />
+
+            <Label Content="Количество балконов" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox Text="{Binding BalconyNumber}" x:Name="BalconyNumberTextBox" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" />
+
+            <Label Content="Информация о наличии приусадебного участка" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox Text="{Binding PrivatePlot}" x:Name="PrivatePlotTextBox" Width="300" Height="100" SpellCheck.IsEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Left" />
+
+            <Label Content="Дополнительные постройки" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox Text="{Binding AdditionalBuildings}" x:Name="AdditionalBuildingsTextBox" Width="300" Height="100" SpellCheck.IsEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Left" />
+
+            <Label Content="Стоимость" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBox Text="{Binding Cost}" x:Name="CostTextBox" Width="200"  SpellCheck.IsEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                <TextBlock Text="рублей" Margin="20 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left" />
+            </StackPanel>
+
+            <Button x:Name="SaveEstate" Content="Сохранить" HorizontalAlignment="Left" Width="150" Height="40" Margin="0 20 0 0" Click="SaveEstate_Click"/>
+        </StackPanel>
+    </UniformGrid>
+    
+</Page>

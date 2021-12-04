@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EstateAgency.Navigation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,21 @@ namespace EstateAgency.Screens.Menu
         public Menu()
         {
             InitializeComponent();
+        }
+
+        private void CreateClientContract_Click(object sender, RoutedEventArgs e)
+        {
+            Navigator.frame.Navigate(new Clients.CreateClient.CreateClientForm());
+        }
+
+        private void SearchEstate_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ShowReports_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -6,9 +6,11 @@
       xmlns:local="clr-namespace:EstateAgency.Screens.Menu"
       mc:Ignorable="d" 
       d:DesignHeight="1080" d:DesignWidth="1920"
-      Title="Menu" Style="{DynamicResource DefaultPage}">
+      Title="Menu">
 
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Button x:Name="CreateClientContract" Content="Сформировать договор с клиентом"/>
+        <Button x:Name="CreateClientContract" Content="Сформировать договор с клиентом" Click="CreateClientContract_Click"/>
+        <Button x:Name="SearchEstate" Content="Поиск недвижимости" Margin="0 20 0 0" Click="SearchEstate_Click"/>
+        <Button x:Name="ShowReports" Content="Отчеты" Margin="0 20 0 0" Click="ShowReports_Click"/>
     </StackPanel>
 </Page>

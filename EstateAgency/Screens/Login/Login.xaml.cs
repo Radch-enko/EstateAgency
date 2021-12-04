@@ -1,5 +1,4 @@
-﻿using EstateAgency.Navigation;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,18 +13,23 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace EstateAgency
+namespace EstateAgency.Screens.Login
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для Login.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Login : Page
     {
-        public MainWindow()
+        
+        EstateAgencyEntities entities = EstateAgencyEntities.GetContext();
+        public Login()
         {
             InitializeComponent();
-            Navigator.frame = MainContainer;
-            Navigator.frame.Navigate(new Screens.Login.Login());
+        }
+
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:EstateAgency"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="450" Width="800" WindowState="Maximized" Style="{DynamicResource DefaultWindow}">
+        Title="MainWindow" Height="600" Width="800">
     <DockPanel LastChildFill="True">
         <Frame x:Name="MainContainer"/>
     </DockPanel>
