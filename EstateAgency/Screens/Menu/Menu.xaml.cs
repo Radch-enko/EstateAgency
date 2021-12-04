@@ -21,14 +21,16 @@ namespace EstateAgency.Screens.Menu
     /// </summary>
     public partial class Menu : Page
     {
+        User employer;
         public Menu(User authorizedUser)
         {
             InitializeComponent();
+            employer = authorizedUser;
         }
 
         private void CreateClientContract_Click(object sender, RoutedEventArgs e)
         {
-            Navigator.frame.Navigate(new Clients.CreateClient.CreateClientForm());
+            Navigator.frame.Navigate(new Clients.CreateClient.CreateClientForm(employer));
         }
 
         private void SearchEstate_Click(object sender, RoutedEventArgs e)

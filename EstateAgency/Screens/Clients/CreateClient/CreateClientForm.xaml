@@ -11,39 +11,54 @@
 
     <UniformGrid Margin="15" Columns="2" Rows="1">
         <StackPanel Orientation="Vertical">
-            <Label Content="Адрес" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Label Content="Продавец*" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <ComboBox x:Name="OwnerPicker" SelectionChanged="OwnerPicker_SelectionChanged" DisplayMemberPath="DisplayName" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200"/>
+
+            <Label Content="Адрес*" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             <TextBox Text="{Binding Address}" x:Name="AddressTextBox" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" />
 
-            <Label Content="Район" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <ComboBox x:Name="DistrictPicker" DisplayMemberPath="Name" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" />
+            <Label Content="Район*" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <ComboBox x:Name="DistrictPicker" SelectionChanged="DistrictPicker_SelectionChanged" DisplayMemberPath="Name" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" />
 
-            <Label Content="Количество комнат" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <TextBox Text="{Binding RoomNumber}" x:Name="RoomNumberTextBox" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" />
+            <StackPanel x:Name="RoomFieldContainer">
+                <Label Content="Количество комнат" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBox Text="{Binding RoomNumber}" x:Name="RoomNumberTextBox" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" />
+            </StackPanel>
 
-            <Label Content="Общая площадь" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Label Name="TotalAreaLabel" Content="Общая площадь м²*" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             <TextBox Text="{Binding TotalArea}" x:Name="TotalAreaTextBox" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" />
 
-            <Label Content="Площадь кухни" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <TextBox  Text="{Binding KitchenArea}" x:Name="KicthenAreaTextBox" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" />
+            <StackPanel x:Name="KitchenAreaContainer">
+                <Label Content="Площадь кухни м²" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBox  Text="{Binding KitchenArea}" x:Name="KicthenAreaTextBox" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" />
+            </StackPanel>
 
-            <Label Content="Этаж" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <TextBox Text="{Binding Floor}" x:Name="FloorTextBox" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" />
+            <StackPanel x:Name="FloorFieldContainer">
+                <Label Content="Этаж" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBox Text="{Binding Floor}" x:Name="FloorTextBox" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" />
 
-            <Label Content="Количество этажей в доме" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <TextBox Text="{Binding FloorNumber}" x:Name="FloorNumberTextBox" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" />
+                <Label Content="Количество этажей в доме*" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBox Text="{Binding FloorNumber}" x:Name="FloorNumberTextBox" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" TextChanged="FloorNumberTextBox_TextChanged" />
+            </StackPanel>
 
-            <Label Content="Тип недвижимости" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <ComboBox x:Name="EstateTypePicker" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" DisplayMemberPath="Name" />
+            <Label Content="Тип недвижимости"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <ComboBox x:Name="EstateTypePicker" SelectionChanged="EstateTypePicker_SelectionChanged" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" DisplayMemberPath="Name" />
 
-            <Label Content="Тип дома" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <ComboBox x:Name="BuildingTypePicker" DisplayMemberPath="Name"  HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" />
+            <StackPanel x:Name="BuildingTypeContainer">
+                <Label Content="Тип дома" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <ComboBox x:Name="BuildingTypePicker" SelectionChanged="BuildingTypePicker_SelectionChanged" DisplayMemberPath="Name"  HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" />
+            </StackPanel>
+     
         </StackPanel>
         <StackPanel Orientation="Vertical">
-            <Label Content="Количество лоджий" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <TextBox Text="{Binding LoggiaNumber}" x:Name="LoqqiaNumberTextBox" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" />
 
-            <Label Content="Количество балконов" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <TextBox Text="{Binding BalconyNumber}" x:Name="BalconyNumberTextBox" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" />
+            <StackPanel x:Name="BalconyFieldsContainer">
+                <Label Content="Количество лоджий" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBox Text="{Binding LoggiaNumber}" x:Name="LoqqiaNumberTextBox" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" />
+
+                <Label Content="Количество балконов" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBox Text="{Binding BalconyNumber}" x:Name="BalconyNumberTextBox" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" />
+            </StackPanel>
 
             <Label Content="Информация о наличии приусадебного участка" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             <TextBox Text="{Binding PrivatePlot}" x:Name="PrivatePlotTextBox" Width="300" Height="100" SpellCheck.IsEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Left" />
@@ -51,12 +66,12 @@
             <Label Content="Дополнительные постройки" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             <TextBox Text="{Binding AdditionalBuildings}" x:Name="AdditionalBuildingsTextBox" Width="300" Height="100" SpellCheck.IsEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Left" />
 
-            <Label Content="Стоимость" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Label Content="Стоимость*" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             <StackPanel Orientation="Horizontal">
-                <TextBox Text="{Binding Cost}" x:Name="CostTextBox" Width="200"  SpellCheck.IsEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                <TextBox Text="{Binding Cost}" x:Name="CostTextBox" Width="200" VerticalAlignment="Center" HorizontalAlignment="Left" />
                 <TextBlock Text="рублей" Margin="20 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left" />
             </StackPanel>
-
+            
             <Button x:Name="SaveEstate" Content="Сохранить" HorizontalAlignment="Left" Width="150" Height="40" Margin="0 20 0 0" Click="SaveEstate_Click"/>
         </StackPanel>
     </UniformGrid>

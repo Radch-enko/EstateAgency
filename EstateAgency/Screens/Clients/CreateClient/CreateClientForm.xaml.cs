@@ -22,9 +22,12 @@ namespace EstateAgency.Screens.Clients.CreateClient
     {
         Estate estate = new Estate();
         EstateAgencyEntities entities = EstateAgencyEntities.GetContext();
-        public CreateClientForm()
+
+        public CreateClientForm(User authorizedEmployer)
         {
             InitializeComponent();
+            estate.BranchID = authorizedEmployer.BranchID;
+            estate.Date = DateTime.Now;
             DataContext = estate;
             SetupPickers();
         }
@@ -32,14 +35,97 @@ namespace EstateAgency.Screens.Clients.CreateClient
         private void SetupPickers()
         {
             EstateTypePicker.ItemsSource = entities.EstateTypes.ToList();
-            BuildingTypePicker.ItemsSource = entities.MultiFloorBuildingTypes.ToList();
+            BuildingTypePicker.ItemsSource = entities.BuildingTypes.ToList();
             DistrictPicker.ItemsSource = entities.Districts.ToList();
+            OwnerPicker.ItemsSource = entities.Clients.ToList();
         }
 
         private void SaveEstate_Click(object sender, RoutedEventArgs e)
         {
-            entities.Estates.Add(estate);
-            entities.SaveChanges();
+            if (
+                OwnerPicker.SelectedItem != null &&
+                DistrictPicker.SelectedItem != null &&
+                AddressTextBox.Text != "" &&
+                TotalAreaTextBox.Text != "" &&
+                FloorNumberTextBox.Text != "" &&
+                CostTextBox.Text != "")
+            {
+                entities.Estates.Add(estate);
+                entities.SaveChanges();
+                MessageBox.Show("Данные успешно сохранены", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                _ = MessageBox.Show("Заполните обязательные поля!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void EstateTypePicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox comboBox = sender as ComboBox;
+            estate.EstateTypeID = (comboBox.SelectedItem as EstateType).ID;
+
+            switch (estate.EstateTypeID)
+            {
+                case 1:
+                    KitchenAreaContainer.Visibility = Visibility.Hidden;
+                    FloorFieldContainer.Visibility = Visibility.Hidden;
+                    RoomFieldContainer.Visibility = Visibility.Hidden;
+                    BuildingTypeContainer.Visibility = Visibility.Hidden;
+                    BalconyFieldsContainer.Visibility = Visibility.Hidden;
+
+                    TotalAreaLabel.Content = "Общая площадь (сот.)*";
+                    break;
+
+                case 3:
+                    KitchenAreaContainer.Visibility = Visibility.Hidden;
+                    break;
+                default:
+                    KitchenAreaContainer.Visibility = Visibility.Visible;
+                    FloorFieldContainer.Visibility = Visibility.Visible;
+                    RoomFieldContainer.Visibility = Visibility.Visible;
+                    BuildingTypeContainer.Visibility = Visibility.Visible;
+                    BalconyFieldsContainer.Visibility = Visibility.Visible;
+                    TotalAreaLabel.Content = "Общая площадь м²*";
+                    break;
+            }
+        }
+
+        private void BuildingTypePicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox comboBox = sender as ComboBox;
+            estate.BuildingTypeID = (comboBox.SelectedItem as BuildingType).ID;
+        }
+
+        private void OwnerPicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox comboBox = sender as ComboBox;
+            estate.OwnerID = (comboBox.SelectedItem as Client).ID;
+        }
+
+        private void DistrictPicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox comboBox = sender as ComboBox;
+            estate.DistrictID = (comboBox.SelectedItem as District).ID;
+        }
+
+        private void FloorNumberTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            if (textBox.Text != "" && textBox.Text != "0")
+            {
+                int floorNumber = int.Parse(textBox.Text);
+
+                if (floorNumber >= 6)
+                {
+                    BuildingTypeContainer.Visibility = Visibility.Visible;
+                }
+            }
+            else
+            {
+                BuildingTypeContainer.Visibility = Visibility.Hidden;
+            }
         }
     }
 }

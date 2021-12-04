@@ -22,6 +22,8 @@ namespace EstateAgency
     
         public int ID { get; set; }
         public string Name { get; set; }
+        public Nullable<int> Min { get; set; }
+        public Nullable<int> Max { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Requirement> Requirements { get; set; }

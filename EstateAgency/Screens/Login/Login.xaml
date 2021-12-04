@@ -11,9 +11,9 @@
 
     <StackPanel VerticalAlignment="Center">
         <Label Content="Логин" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBox x:Name="LoginTextBox" Text="{Binding Login}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" />
+        <TextBox x:Name="LoginTextBox" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" />
         <Label Content="Пароль" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBox x:Name="PasswordTextBox" Text="{Binding Password}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" />
+        <TextBox x:Name="PasswordTextBox" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" />
 
         <Button x:Name="LoginButton" Click="LoginButton_Click" Content="Войти" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="30" Margin="0 20 0 0"/>
     </StackPanel>

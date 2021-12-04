@@ -8,6 +8,6 @@
         WindowStartupLocation="CenterScreen"
         Title="MainWindow" Height="600" Width="800">
     <DockPanel LastChildFill="True">
-        <Frame x:Name="MainContainer"/>
+        <Frame x:Name="MainContainer" NavigationUIVisibility="Hidden"/>
     </DockPanel>
 </Window>

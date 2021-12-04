@@ -104,7 +104,9 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Min" Type="int" />
+          <Property Name="Max" Type="int" />
         </EntityType>
         <EntityType Name="Requirements">
           <Key>
@@ -539,8 +541,10 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Requirements" Relationship="Self.FK_Requirements_MultiFloorBuildingType" FromRole="MultiFloorBuildingType" ToRole="Requirements" />
+          <Property Name="Min" Type="Int32" />
+          <Property Name="Max" Type="Int32" />
         </EntityType>
         <EntityType Name="Requirement">
           <Key>
@@ -974,6 +978,8 @@
           <EntitySetMapping Name="MultiFloorBuildingTypes">
             <EntityTypeMapping TypeName="EstateAgencyModel.MultiFloorBuildingType">
               <MappingFragment StoreEntitySet="MultiFloorBuildingType">
+                <ScalarProperty Name="Max" ColumnName="Max" />
+                <ScalarProperty Name="Min" ColumnName="Min" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>

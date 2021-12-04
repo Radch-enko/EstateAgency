@@ -100,6 +100,7 @@
     <Compile Include="EstateType.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
+    <Compile Include="Extensions\ClientExtensions.cs" />
     <Compile Include="Extensions\DatabaseContext.cs" />
     <Compile Include="Feedback.cs">
       <DependentUpon>Database.tt</DependentUpon>

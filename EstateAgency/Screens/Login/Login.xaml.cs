@@ -27,6 +27,13 @@ namespace EstateAgency.Screens.Login
         {
             InitializeComponent();
             users = entities.Users;
+            SetupTestCreds();
+        }
+
+        private void SetupTestCreds()
+        {
+            LoginTextBox.Text = "mila8734";
+            PasswordTextBox.Text = "55ac8ed83";
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
