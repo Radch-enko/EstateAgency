@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EstateAgency.Navigation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,17 +14,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace EstateAgency.Screens.Clients.CreateClient
+namespace EstateAgency.Screens.Estates
 {
     /// <summary>
-    /// Логика взаимодействия для CreateClientForm.xaml
+    /// Логика взаимодействия для CreateNewEstate.xaml
     /// </summary>
-    public partial class CreateClientForm : Page
+    public partial class CreateNewEstate : Page
     {
         Estate estate = new Estate();
         EstateAgencyEntities entities = EstateAgencyEntities.GetContext();
 
-        public CreateClientForm(User authorizedEmployer)
+        public CreateNewEstate(User authorizedEmployer)
         {
             InitializeComponent();
             estate.BranchID = authorizedEmployer.BranchID;
@@ -42,21 +43,29 @@ namespace EstateAgency.Screens.Clients.CreateClient
 
         private void SaveEstate_Click(object sender, RoutedEventArgs e)
         {
-            if (
-                OwnerPicker.SelectedItem != null &&
-                DistrictPicker.SelectedItem != null &&
-                AddressTextBox.Text != "" &&
-                TotalAreaTextBox.Text != "" &&
-                FloorNumberTextBox.Text != "" &&
-                CostTextBox.Text != "")
+            try
             {
-                entities.Estates.Add(estate);
-                entities.SaveChanges();
-                MessageBox.Show("Данные успешно сохранены", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
+                if (
+               OwnerPicker.SelectedItem != null &&
+               DistrictPicker.SelectedItem != null &&
+               AddressTextBox.Text != "" &&
+               TotalAreaTextBox.Text != "" &&
+               FloorNumberTextBox.Text != "" &&
+               CostTextBox.Text != "")
+                {
+                    entities.Estates.Add(estate);
+                    entities.SaveChanges();
+                    MessageBox.Show("Данные успешно сохранены", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
+                    Navigator.frame.GoBack();
+                }
+                else
+                {
+                    _ = MessageBox.Show("Заполните обязательные поля!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
-            else
+            catch (Exception exception)
             {
-                _ = MessageBox.Show("Заполните обязательные поля!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                _ = MessageBox.Show(exception.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

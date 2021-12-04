@@ -30,7 +30,7 @@ namespace EstateAgency.Screens.Menu
 
         private void CreateClientContract_Click(object sender, RoutedEventArgs e)
         {
-            Navigator.frame.Navigate(new Clients.CreateClient.CreateClientForm(employer));
+            Navigator.frame.Navigate(new Estates.CreateNewEstate(employer));
         }
 
         private void SearchEstate_Click(object sender, RoutedEventArgs e)
@@ -41,6 +41,11 @@ namespace EstateAgency.Screens.Menu
         private void ShowReports_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void AddNewClient_Click(object sender, RoutedEventArgs e)
+        {
+            Navigator.frame.Navigate(new Clients.CreateNewClient(employer));
         }
     }
 }

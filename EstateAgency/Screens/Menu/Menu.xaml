@@ -10,6 +10,7 @@
 
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
         <Button x:Name="CreateClientContract" Content="Сформировать договор с клиентом" Click="CreateClientContract_Click"/>
+        <Button x:Name="AddNewClient" Content="Новый клиент" Click="AddNewClient_Click" Margin="0 20 0 0"/>
         <Button x:Name="SearchEstate" Content="Поиск недвижимости" Margin="0 20 0 0" Click="SearchEstate_Click"/>
         <Button x:Name="ShowReports" Content="Отчеты" Margin="0 20 0 0" Click="ShowReports_Click"/>
     </StackPanel>

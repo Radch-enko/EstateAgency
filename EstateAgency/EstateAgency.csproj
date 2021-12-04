@@ -111,8 +111,11 @@
     <Compile Include="Requirement.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
-    <Compile Include="Screens\Clients\CreateClient\CreateClientForm.xaml.cs">
-      <DependentUpon>CreateClientForm.xaml</DependentUpon>
+    <Compile Include="Screens\Clients\CreateNewClient.xaml.cs">
+      <DependentUpon>CreateNewClient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Estates\CreateNewEstate.xaml.cs">
+      <DependentUpon>CreateNewEstate.xaml</DependentUpon>
     </Compile>
     <Compile Include="Screens\Login\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
@@ -145,7 +148,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Screens\Clients\CreateClient\CreateClientForm.xaml">
+    <Page Include="Screens\Clients\CreateNewClient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Estates\CreateNewEstate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
