@@ -42,14 +42,14 @@
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Surname" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="MiddleName" Type="varchar" MaxLength="50" />
-          <Property Name="PassportSeries" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="PassportSeries" Type="int" />
           <Property Name="PassportNumber" Type="int" Nullable="false" />
-          <Property Name="IssuedByWhom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IssuedByWhom" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="DateOfIssue" Type="date" Nullable="false" />
           <Property Name="DivisionCode" Type="nvarchar" MaxLength="50" />
-          <Property Name="Registration" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Registration" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Phone" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Address" Type="varchar" MaxLength="100" />
+          <Property Name="Address" Type="varchar" MaxLength="200" />
           <Property Name="BranchID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Districts">
@@ -271,7 +271,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Requirements_Clients">
+        <Association Name="FK_Requirements_Clients1">
           <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
           <End Role="Requirements" Type="Self.Requirements" Multiplicity="*" />
           <ReferentialConstraint>
@@ -397,7 +397,7 @@
             <End Role="Estates" EntitySet="Estates" />
             <End Role="Feedback" EntitySet="Feedback" />
           </AssociationSet>
-          <AssociationSet Name="FK_Requirements_Clients" Association="Self.FK_Requirements_Clients">
+          <AssociationSet Name="FK_Requirements_Clients1" Association="Self.FK_Requirements_Clients1">
             <End Role="Clients" EntitySet="Clients" />
             <End Role="Requirements" EntitySet="Requirements" />
           </AssociationSet>
@@ -426,6 +426,85 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EstateAgencyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="EstateAgencyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Agreements" EntityType="EstateAgencyModel.Agreement" />
+          <EntitySet Name="Branches" EntityType="EstateAgencyModel.Branch" />
+          <EntitySet Name="BuildingTypes" EntityType="EstateAgencyModel.BuildingType" />
+          <EntitySet Name="Clients" EntityType="EstateAgencyModel.Client" />
+          <EntitySet Name="Districts" EntityType="EstateAgencyModel.District" />
+          <EntitySet Name="Estates" EntityType="EstateAgencyModel.Estate" />
+          <EntitySet Name="EstateTypes" EntityType="EstateAgencyModel.EstateType" />
+          <EntitySet Name="Feedbacks" EntityType="EstateAgencyModel.Feedback" />
+          <EntitySet Name="MultiFloorBuildingTypes" EntityType="EstateAgencyModel.MultiFloorBuildingType" />
+          <EntitySet Name="Requirements" EntityType="EstateAgencyModel.Requirement" />
+          <EntitySet Name="sysdiagrams" EntityType="EstateAgencyModel.sysdiagram" />
+          <EntitySet Name="Users" EntityType="EstateAgencyModel.User" />
+          <EntitySet Name="UsersRoles" EntityType="EstateAgencyModel.UsersRole" />
+          <AssociationSet Name="FK_Agreements_Branch" Association="EstateAgencyModel.FK_Agreements_Branch">
+            <End Role="Branch" EntitySet="Branches" />
+            <End Role="Agreement" EntitySet="Agreements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agreements_Estates" Association="EstateAgencyModel.FK_Agreements_Estates">
+            <End Role="Estate" EntitySet="Estates" />
+            <End Role="Agreement" EntitySet="Agreements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clients_Branch" Association="EstateAgencyModel.FK_Clients_Branch">
+            <End Role="Branch" EntitySet="Branches" />
+            <End Role="Client" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Estates_Branch" Association="EstateAgencyModel.FK_Estates_Branch">
+            <End Role="Branch" EntitySet="Branches" />
+            <End Role="Estate" EntitySet="Estates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Branch" Association="EstateAgencyModel.FK_Users_Branch">
+            <End Role="Branch" EntitySet="Branches" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Estates_BuildingType" Association="EstateAgencyModel.FK_Estates_BuildingType">
+            <End Role="BuildingType" EntitySet="BuildingTypes" />
+            <End Role="Estate" EntitySet="Estates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clients_Clients" Association="EstateAgencyModel.FK_Clients_Clients">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Client1" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Feedback_Clients" Association="EstateAgencyModel.FK_Feedback_Clients">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Feedback" EntitySet="Feedbacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Requirements_Clients" Association="EstateAgencyModel.FK_Requirements_Clients">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Requirement" EntitySet="Requirements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Estates_Districts" Association="EstateAgencyModel.FK_Estates_Districts">
+            <End Role="District" EntitySet="Districts" />
+            <End Role="Estate" EntitySet="Estates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Requirements_Districts" Association="EstateAgencyModel.FK_Requirements_Districts">
+            <End Role="District" EntitySet="Districts" />
+            <End Role="Requirement" EntitySet="Requirements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Estates_EstateTypes" Association="EstateAgencyModel.FK_Estates_EstateTypes">
+            <End Role="EstateType" EntitySet="EstateTypes" />
+            <End Role="Estate" EntitySet="Estates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Feedback_Estates" Association="EstateAgencyModel.FK_Feedback_Estates">
+            <End Role="Estate" EntitySet="Estates" />
+            <End Role="Feedback" EntitySet="Feedbacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Requirements_EstateTypes" Association="EstateAgencyModel.FK_Requirements_EstateTypes">
+            <End Role="EstateType" EntitySet="EstateTypes" />
+            <End Role="Requirement" EntitySet="Requirements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Requirements_MultiFloorBuildingType" Association="EstateAgencyModel.FK_Requirements_MultiFloorBuildingType">
+            <End Role="MultiFloorBuildingType" EntitySet="MultiFloorBuildingTypes" />
+            <End Role="Requirement" EntitySet="Requirements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_UsersRoles" Association="EstateAgencyModel.FK_Users_UsersRoles">
+            <End Role="UsersRole" EntitySet="UsersRoles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Agreement">
           <Key>
             <PropertyRef Name="ID" />
@@ -434,10 +513,10 @@
           <Property Name="BuyerID" Type="Int32" Nullable="false" />
           <Property Name="EstateID" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Cost" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Cost" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="BranchID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Branch" Relationship="Self.FK_Agreements_Branch" FromRole="Agreements" ToRole="Branch" />
-          <NavigationProperty Name="Estate" Relationship="Self.FK_Agreements_Estates" FromRole="Agreements" ToRole="Estates" />
+          <NavigationProperty Name="Branch" Relationship="EstateAgencyModel.FK_Agreements_Branch" FromRole="Agreement" ToRole="Branch" />
+          <NavigationProperty Name="Estate" Relationship="EstateAgencyModel.FK_Agreements_Estates" FromRole="Agreement" ToRole="Estate" />
         </EntityType>
         <EntityType Name="Branch">
           <Key>
@@ -449,33 +528,41 @@
           <Property Name="Room" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
           <Property Name="Fax" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Agreements" Relationship="Self.FK_Agreements_Branch" FromRole="Branch" ToRole="Agreements" />
-          <NavigationProperty Name="Clients" Relationship="Self.FK_Clients_Branch" FromRole="Branch" ToRole="Clients" />
-          <NavigationProperty Name="Estates" Relationship="Self.FK_Estates_Branch" FromRole="Branch" ToRole="Estates" />
+          <NavigationProperty Name="Agreements" Relationship="EstateAgencyModel.FK_Agreements_Branch" FromRole="Branch" ToRole="Agreement" />
+          <NavigationProperty Name="Clients" Relationship="EstateAgencyModel.FK_Clients_Branch" FromRole="Branch" ToRole="Client" />
+          <NavigationProperty Name="Estates" Relationship="EstateAgencyModel.FK_Estates_Branch" FromRole="Branch" ToRole="Estate" />
           <NavigationProperty Name="Users" Relationship="EstateAgencyModel.FK_Users_Branch" FromRole="Branch" ToRole="User" />
+        </EntityType>
+        <EntityType Name="BuildingType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Estates" Relationship="EstateAgencyModel.FK_Estates_BuildingType" FromRole="BuildingType" ToRole="Estate" />
         </EntityType>
         <EntityType Name="Client">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PassportSeries" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="PassportSeries" Type="Int32" />
           <Property Name="PassportNumber" Type="Int32" Nullable="false" />
-          <Property Name="IssuedByWhom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IssuedByWhom" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="DateOfIssue" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="DivisionCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Registration" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Registration" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="BranchID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Branch" Relationship="Self.FK_Clients_Branch" FromRole="Clients" ToRole="Branch" />
-          <NavigationProperty Name="Clients1" Relationship="Self.FK_Clients_Clients" FromRole="Clients" ToRole="Clients1" />
-          <NavigationProperty Name="Client1" Relationship="Self.FK_Clients_Clients" FromRole="Clients1" ToRole="Clients" />
-          <NavigationProperty Name="Feedbacks" Relationship="Self.FK_Feedback_Clients" FromRole="Clients" ToRole="Feedback" />
-          <NavigationProperty Name="Requirements" Relationship="Self.FK_Requirements_Clients" FromRole="Clients" ToRole="Requirements" />
+          <NavigationProperty Name="Branch" Relationship="EstateAgencyModel.FK_Clients_Branch" FromRole="Client" ToRole="Branch" />
+          <NavigationProperty Name="Clients1" Relationship="EstateAgencyModel.FK_Clients_Clients" FromRole="Client" ToRole="Client1" />
+          <NavigationProperty Name="Client1" Relationship="EstateAgencyModel.FK_Clients_Clients" FromRole="Client1" ToRole="Client" />
+          <NavigationProperty Name="Feedbacks" Relationship="EstateAgencyModel.FK_Feedback_Clients" FromRole="Client" ToRole="Feedback" />
+          <NavigationProperty Name="Requirements" Relationship="EstateAgencyModel.FK_Requirements_Clients" FromRole="Client" ToRole="Requirement" />
         </EntityType>
         <EntityType Name="District">
           <Key>
@@ -483,8 +570,8 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Estates" Relationship="Self.FK_Estates_Districts" FromRole="Districts" ToRole="Estates" />
-          <NavigationProperty Name="Requirements" Relationship="Self.FK_Requirements_Districts" FromRole="Districts" ToRole="Requirements" />
+          <NavigationProperty Name="Estates" Relationship="EstateAgencyModel.FK_Estates_Districts" FromRole="District" ToRole="Estate" />
+          <NavigationProperty Name="Requirements" Relationship="EstateAgencyModel.FK_Requirements_Districts" FromRole="District" ToRole="Requirement" />
         </EntityType>
         <EntityType Name="Estate">
           <Key>
@@ -492,7 +579,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="OwnerID" Type="Int32" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="DistrictID" Type="Int32" Nullable="false" />
           <Property Name="RoomNumber" Type="Int32" />
           <Property Name="TotalArea" Type="Double" Nullable="false" />
@@ -500,20 +587,20 @@
           <Property Name="Floor" Type="Int32" />
           <Property Name="FloorNumber" Type="Int32" Nullable="false" />
           <Property Name="EstateTypeID" Type="Int32" />
+          <Property Name="BuildingTypeID" Type="Int32" />
           <Property Name="LoggiaNumber" Type="Int32" />
           <Property Name="BalconyNumber" Type="Int32" />
           <Property Name="PrivatePlot" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <Property Name="AdditionalBuildings" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Name="Cost" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Cost" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="BranchID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Agreements" Relationship="Self.FK_Agreements_Estates" FromRole="Estates" ToRole="Agreements" />
-          <NavigationProperty Name="Branch" Relationship="Self.FK_Estates_Branch" FromRole="Estates" ToRole="Branch" />
-          <NavigationProperty Name="District" Relationship="Self.FK_Estates_Districts" FromRole="Estates" ToRole="Districts" />
-          <NavigationProperty Name="EstateType" Relationship="Self.FK_Estates_EstateTypes" FromRole="Estates" ToRole="EstateTypes" />
-          <NavigationProperty Name="Feedbacks" Relationship="Self.FK_Feedback_Estates" FromRole="Estates" ToRole="Feedback" />
-          <Property Name="BuildingTypeID" Type="Int32" />
+          <NavigationProperty Name="Agreements" Relationship="EstateAgencyModel.FK_Agreements_Estates" FromRole="Estate" ToRole="Agreement" />
+          <NavigationProperty Name="Branch" Relationship="EstateAgencyModel.FK_Estates_Branch" FromRole="Estate" ToRole="Branch" />
           <NavigationProperty Name="BuildingType" Relationship="EstateAgencyModel.FK_Estates_BuildingType" FromRole="Estate" ToRole="BuildingType" />
+          <NavigationProperty Name="District" Relationship="EstateAgencyModel.FK_Estates_Districts" FromRole="Estate" ToRole="District" />
+          <NavigationProperty Name="EstateType" Relationship="EstateAgencyModel.FK_Estates_EstateTypes" FromRole="Estate" ToRole="EstateType" />
+          <NavigationProperty Name="Feedbacks" Relationship="EstateAgencyModel.FK_Feedback_Estates" FromRole="Estate" ToRole="Feedback" />
         </EntityType>
         <EntityType Name="EstateType">
           <Key>
@@ -521,30 +608,30 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Estates" Relationship="Self.FK_Estates_EstateTypes" FromRole="EstateTypes" ToRole="Estates" />
-          <NavigationProperty Name="Requirements" Relationship="Self.FK_Requirements_EstateTypes" FromRole="EstateTypes" ToRole="Requirements" />
+          <NavigationProperty Name="Estates" Relationship="EstateAgencyModel.FK_Estates_EstateTypes" FromRole="EstateType" ToRole="Estate" />
+          <NavigationProperty Name="Requirements" Relationship="EstateAgencyModel.FK_Requirements_EstateTypes" FromRole="EstateType" ToRole="Requirement" />
         </EntityType>
         <EntityType Name="Feedback">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Comment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Comment" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="VisitDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="EstateID" Type="Int32" />
           <Property Name="ClientID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Client" Relationship="Self.FK_Feedback_Clients" FromRole="Feedback" ToRole="Clients" />
-          <NavigationProperty Name="Estate" Relationship="Self.FK_Feedback_Estates" FromRole="Feedback" ToRole="Estates" />
+          <NavigationProperty Name="Client" Relationship="EstateAgencyModel.FK_Feedback_Clients" FromRole="Feedback" ToRole="Client" />
+          <NavigationProperty Name="Estate" Relationship="EstateAgencyModel.FK_Feedback_Estates" FromRole="Feedback" ToRole="Estate" />
         </EntityType>
         <EntityType Name="MultiFloorBuildingType">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Requirements" Relationship="Self.FK_Requirements_MultiFloorBuildingType" FromRole="MultiFloorBuildingType" ToRole="Requirements" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Min" Type="Int32" />
           <Property Name="Max" Type="Int32" />
+          <NavigationProperty Name="Requirements" Relationship="EstateAgencyModel.FK_Requirements_MultiFloorBuildingType" FromRole="MultiFloorBuildingType" ToRole="Requirement" />
         </EntityType>
         <EntityType Name="Requirement">
           <Key>
@@ -558,253 +645,10 @@
           <Property Name="RoomNumber" Type="Int32" />
           <Property Name="MinimalFloor" Type="Int32" />
           <Property Name="MaximalFloor" Type="Int32" />
-          <NavigationProperty Name="Client" Relationship="Self.FK_Requirements_Clients" FromRole="Requirements" ToRole="Clients" />
-          <NavigationProperty Name="District" Relationship="Self.FK_Requirements_Districts" FromRole="Requirements" ToRole="Districts" />
-          <NavigationProperty Name="EstateType" Relationship="Self.FK_Requirements_EstateTypes" FromRole="Requirements" ToRole="EstateTypes" />
-          <NavigationProperty Name="MultiFloorBuildingType" Relationship="Self.FK_Requirements_MultiFloorBuildingType" FromRole="Requirements" ToRole="MultiFloorBuildingType" />
-        </EntityType>
-        <Association Name="FK_Agreements_Branch">
-          <End Role="Branch" Type="Self.Branch" Multiplicity="1" />
-          <End Role="Agreements" Type="Self.Agreement" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Branch">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Agreements">
-              <PropertyRef Name="BranchID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Agreements_Estates">
-          <End Role="Estates" Type="Self.Estate" Multiplicity="1" />
-          <End Role="Agreements" Type="Self.Agreement" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Estates">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Agreements">
-              <PropertyRef Name="EstateID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Clients_Branch">
-          <End Role="Branch" Type="Self.Branch" Multiplicity="1" />
-          <End Role="Clients" Type="Self.Client" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Branch">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Clients">
-              <PropertyRef Name="BranchID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Estates_Branch">
-          <End Role="Branch" Type="Self.Branch" Multiplicity="1" />
-          <End Role="Estates" Type="Self.Estate" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Branch">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Estates">
-              <PropertyRef Name="BranchID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Clients_Clients">
-          <End Role="Clients" Type="Self.Client" Multiplicity="1" />
-          <End Role="Clients1" Type="Self.Client" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Clients">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Clients1">
-              <PropertyRef Name="ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Feedback_Clients">
-          <End Role="Clients" Type="Self.Client" Multiplicity="1" />
-          <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Clients">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Feedback">
-              <PropertyRef Name="ClientID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Requirements_Clients">
-          <End Role="Clients" Type="Self.Client" Multiplicity="1" />
-          <End Role="Requirements" Type="Self.Requirement" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Clients">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Requirements">
-              <PropertyRef Name="ClientID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Estates_Districts">
-          <End Role="Districts" Type="Self.District" Multiplicity="1" />
-          <End Role="Estates" Type="Self.Estate" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Districts">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Estates">
-              <PropertyRef Name="DistrictID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Requirements_Districts">
-          <End Role="Districts" Type="Self.District" Multiplicity="0..1" />
-          <End Role="Requirements" Type="Self.Requirement" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Districts">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Requirements">
-              <PropertyRef Name="DistrictID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Estates_EstateTypes">
-          <End Role="EstateTypes" Type="Self.EstateType" Multiplicity="0..1" />
-          <End Role="Estates" Type="Self.Estate" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EstateTypes">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Estates">
-              <PropertyRef Name="EstateTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Feedback_Estates">
-          <End Role="Estates" Type="Self.Estate" Multiplicity="0..1" />
-          <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Estates">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Feedback">
-              <PropertyRef Name="EstateID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Requirements_EstateTypes">
-          <End Role="EstateTypes" Type="Self.EstateType" Multiplicity="0..1" />
-          <End Role="Requirements" Type="Self.Requirement" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EstateTypes">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Requirements">
-              <PropertyRef Name="EstateTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Requirements_MultiFloorBuildingType">
-          <End Role="MultiFloorBuildingType" Type="Self.MultiFloorBuildingType" Multiplicity="0..1" />
-          <End Role="Requirements" Type="Self.Requirement" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MultiFloorBuildingType">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Requirements">
-              <PropertyRef Name="MultiFloorBuildingTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="EstateAgencyEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Agreements" EntityType="Self.Agreement" />
-          <EntitySet Name="Branches" EntityType="Self.Branch" />
-          <EntitySet Name="Clients" EntityType="Self.Client" />
-          <EntitySet Name="Districts" EntityType="Self.District" />
-          <EntitySet Name="Estates" EntityType="Self.Estate" />
-          <EntitySet Name="EstateTypes" EntityType="Self.EstateType" />
-          <EntitySet Name="Feedbacks" EntityType="Self.Feedback" />
-          <EntitySet Name="MultiFloorBuildingTypes" EntityType="Self.MultiFloorBuildingType" />
-          <EntitySet Name="Requirements" EntityType="Self.Requirement" />
-          <AssociationSet Name="FK_Agreements_Branch" Association="Self.FK_Agreements_Branch">
-            <End Role="Branch" EntitySet="Branches" />
-            <End Role="Agreements" EntitySet="Agreements" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Agreements_Estates" Association="Self.FK_Agreements_Estates">
-            <End Role="Estates" EntitySet="Estates" />
-            <End Role="Agreements" EntitySet="Agreements" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Clients_Branch" Association="Self.FK_Clients_Branch">
-            <End Role="Branch" EntitySet="Branches" />
-            <End Role="Clients" EntitySet="Clients" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Estates_Branch" Association="Self.FK_Estates_Branch">
-            <End Role="Branch" EntitySet="Branches" />
-            <End Role="Estates" EntitySet="Estates" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Clients_Clients" Association="Self.FK_Clients_Clients">
-            <End Role="Clients" EntitySet="Clients" />
-            <End Role="Clients1" EntitySet="Clients" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Feedback_Clients" Association="Self.FK_Feedback_Clients">
-            <End Role="Clients" EntitySet="Clients" />
-            <End Role="Feedback" EntitySet="Feedbacks" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Requirements_Clients" Association="Self.FK_Requirements_Clients">
-            <End Role="Clients" EntitySet="Clients" />
-            <End Role="Requirements" EntitySet="Requirements" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Estates_Districts" Association="Self.FK_Estates_Districts">
-            <End Role="Districts" EntitySet="Districts" />
-            <End Role="Estates" EntitySet="Estates" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Requirements_Districts" Association="Self.FK_Requirements_Districts">
-            <End Role="Districts" EntitySet="Districts" />
-            <End Role="Requirements" EntitySet="Requirements" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Estates_EstateTypes" Association="Self.FK_Estates_EstateTypes">
-            <End Role="EstateTypes" EntitySet="EstateTypes" />
-            <End Role="Estates" EntitySet="Estates" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Feedback_Estates" Association="Self.FK_Feedback_Estates">
-            <End Role="Estates" EntitySet="Estates" />
-            <End Role="Feedback" EntitySet="Feedbacks" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Requirements_EstateTypes" Association="Self.FK_Requirements_EstateTypes">
-            <End Role="EstateTypes" EntitySet="EstateTypes" />
-            <End Role="Requirements" EntitySet="Requirements" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Requirements_MultiFloorBuildingType" Association="Self.FK_Requirements_MultiFloorBuildingType">
-            <End Role="MultiFloorBuildingType" EntitySet="MultiFloorBuildingTypes" />
-            <End Role="Requirements" EntitySet="Requirements" />
-          </AssociationSet>
-          <EntitySet Name="BuildingTypes" EntityType="EstateAgencyModel.BuildingType" />
-          <EntitySet Name="sysdiagrams" EntityType="EstateAgencyModel.sysdiagram" />
-          <EntitySet Name="Users" EntityType="EstateAgencyModel.User" />
-          <EntitySet Name="UsersRoles" EntityType="EstateAgencyModel.UsersRole" />
-          <AssociationSet Name="FK_Users_Branch" Association="EstateAgencyModel.FK_Users_Branch">
-            <End Role="Branch" EntitySet="Branches" />
-            <End Role="User" EntitySet="Users" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Estates_BuildingType" Association="EstateAgencyModel.FK_Estates_BuildingType">
-            <End Role="BuildingType" EntitySet="BuildingTypes" />
-            <End Role="Estate" EntitySet="Estates" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Users_UsersRoles" Association="EstateAgencyModel.FK_Users_UsersRoles">
-            <End Role="UsersRole" EntitySet="UsersRoles" />
-            <End Role="User" EntitySet="Users" />
-          </AssociationSet>
-        </EntityContainer>
-        <EntityType Name="BuildingType">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Estates" Relationship="EstateAgencyModel.FK_Estates_BuildingType" FromRole="BuildingType" ToRole="Estate" />
+          <NavigationProperty Name="Client" Relationship="EstateAgencyModel.FK_Requirements_Clients" FromRole="Requirement" ToRole="Client" />
+          <NavigationProperty Name="District" Relationship="EstateAgencyModel.FK_Requirements_Districts" FromRole="Requirement" ToRole="District" />
+          <NavigationProperty Name="EstateType" Relationship="EstateAgencyModel.FK_Requirements_EstateTypes" FromRole="Requirement" ToRole="EstateType" />
+          <NavigationProperty Name="MultiFloorBuildingType" Relationship="EstateAgencyModel.FK_Requirements_MultiFloorBuildingType" FromRole="Requirement" ToRole="MultiFloorBuildingType" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -839,6 +683,54 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Users" Relationship="EstateAgencyModel.FK_Users_UsersRoles" FromRole="UsersRole" ToRole="User" />
         </EntityType>
+        <Association Name="FK_Agreements_Branch">
+          <End Type="EstateAgencyModel.Branch" Role="Branch" Multiplicity="1" />
+          <End Type="EstateAgencyModel.Agreement" Role="Agreement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branch">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Agreement">
+              <PropertyRef Name="BranchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agreements_Estates">
+          <End Type="EstateAgencyModel.Estate" Role="Estate" Multiplicity="1" />
+          <End Type="EstateAgencyModel.Agreement" Role="Agreement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estate">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Agreement">
+              <PropertyRef Name="EstateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clients_Branch">
+          <End Type="EstateAgencyModel.Branch" Role="Branch" Multiplicity="1" />
+          <End Type="EstateAgencyModel.Client" Role="Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branch">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="BranchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Estates_Branch">
+          <End Type="EstateAgencyModel.Branch" Role="Branch" Multiplicity="1" />
+          <End Type="EstateAgencyModel.Estate" Role="Estate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branch">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Estate">
+              <PropertyRef Name="BranchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Users_Branch">
           <End Type="EstateAgencyModel.Branch" Role="Branch" Multiplicity="1" />
           <End Type="EstateAgencyModel.User" Role="User" Multiplicity="*" />
@@ -863,6 +755,114 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Clients_Clients">
+          <End Type="EstateAgencyModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="EstateAgencyModel.Client" Role="Client1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Client1">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Feedback_Clients">
+          <End Type="EstateAgencyModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="EstateAgencyModel.Feedback" Role="Feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Feedback">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Requirements_Clients">
+          <End Type="EstateAgencyModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="EstateAgencyModel.Requirement" Role="Requirement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Requirement">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Estates_Districts">
+          <End Type="EstateAgencyModel.District" Role="District" Multiplicity="1" />
+          <End Type="EstateAgencyModel.Estate" Role="Estate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="District">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Estate">
+              <PropertyRef Name="DistrictID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Requirements_Districts">
+          <End Type="EstateAgencyModel.District" Role="District" Multiplicity="0..1" />
+          <End Type="EstateAgencyModel.Requirement" Role="Requirement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="District">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Requirement">
+              <PropertyRef Name="DistrictID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Estates_EstateTypes">
+          <End Type="EstateAgencyModel.EstateType" Role="EstateType" Multiplicity="0..1" />
+          <End Type="EstateAgencyModel.Estate" Role="Estate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstateType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Estate">
+              <PropertyRef Name="EstateTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Feedback_Estates">
+          <End Type="EstateAgencyModel.Estate" Role="Estate" Multiplicity="0..1" />
+          <End Type="EstateAgencyModel.Feedback" Role="Feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estate">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Feedback">
+              <PropertyRef Name="EstateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Requirements_EstateTypes">
+          <End Type="EstateAgencyModel.EstateType" Role="EstateType" Multiplicity="0..1" />
+          <End Type="EstateAgencyModel.Requirement" Role="Requirement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstateType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Requirement">
+              <PropertyRef Name="EstateTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Requirements_MultiFloorBuildingType">
+          <End Type="EstateAgencyModel.MultiFloorBuildingType" Role="MultiFloorBuildingType" Multiplicity="0..1" />
+          <End Type="EstateAgencyModel.Requirement" Role="Requirement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MultiFloorBuildingType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Requirement">
+              <PropertyRef Name="MultiFloorBuildingTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Users_UsersRoles">
           <End Type="EstateAgencyModel.UsersRole" Role="UsersRole" Multiplicity="0..1" />
           <End Type="EstateAgencyModel.User" Role="User" Multiplicity="*" />
@@ -884,94 +884,102 @@
           <EntitySetMapping Name="Agreements">
             <EntityTypeMapping TypeName="EstateAgencyModel.Agreement">
               <MappingFragment StoreEntitySet="Agreements">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="BuyerID" ColumnName="BuyerID" />
-                <ScalarProperty Name="EstateID" ColumnName="EstateID" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Cost" ColumnName="Cost" />
                 <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="EstateID" ColumnName="EstateID" />
+                <ScalarProperty Name="BuyerID" ColumnName="BuyerID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Branches">
             <EntityTypeMapping TypeName="EstateAgencyModel.Branch">
               <MappingFragment StoreEntitySet="Branch">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Street" ColumnName="Street" />
-                <ScalarProperty Name="House" ColumnName="House" />
-                <ScalarProperty Name="Room" ColumnName="Room" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Room" ColumnName="Room" />
+                <ScalarProperty Name="House" ColumnName="House" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BuildingTypes">
+            <EntityTypeMapping TypeName="EstateAgencyModel.BuildingType">
+              <MappingFragment StoreEntitySet="BuildingType">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Clients">
             <EntityTypeMapping TypeName="EstateAgencyModel.Client">
               <MappingFragment StoreEntitySet="Clients">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Surname" ColumnName="Surname" />
-                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
-                <ScalarProperty Name="PassportSeries" ColumnName="PassportSeries" />
-                <ScalarProperty Name="PassportNumber" ColumnName="PassportNumber" />
-                <ScalarProperty Name="IssuedByWhom" ColumnName="IssuedByWhom" />
-                <ScalarProperty Name="DateOfIssue" ColumnName="DateOfIssue" />
-                <ScalarProperty Name="DivisionCode" ColumnName="DivisionCode" />
-                <ScalarProperty Name="Registration" ColumnName="Registration" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Registration" ColumnName="Registration" />
+                <ScalarProperty Name="DivisionCode" ColumnName="DivisionCode" />
+                <ScalarProperty Name="DateOfIssue" ColumnName="DateOfIssue" />
+                <ScalarProperty Name="IssuedByWhom" ColumnName="IssuedByWhom" />
+                <ScalarProperty Name="PassportNumber" ColumnName="PassportNumber" />
+                <ScalarProperty Name="PassportSeries" ColumnName="PassportSeries" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Districts">
             <EntityTypeMapping TypeName="EstateAgencyModel.District">
               <MappingFragment StoreEntitySet="Districts">
-                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Estates">
             <EntityTypeMapping TypeName="EstateAgencyModel.Estate">
               <MappingFragment StoreEntitySet="Estates">
-                <ScalarProperty Name="BuildingTypeID" ColumnName="BuildingTypeID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="DistrictID" ColumnName="DistrictID" />
-                <ScalarProperty Name="RoomNumber" ColumnName="RoomNumber" />
-                <ScalarProperty Name="TotalArea" ColumnName="TotalArea" />
-                <ScalarProperty Name="KitchenArea" ColumnName="KitchenArea" />
-                <ScalarProperty Name="Floor" ColumnName="Floor" />
-                <ScalarProperty Name="FloorNumber" ColumnName="FloorNumber" />
-                <ScalarProperty Name="EstateTypeID" ColumnName="EstateTypeID" />
-                <ScalarProperty Name="LoggiaNumber" ColumnName="LoggiaNumber" />
-                <ScalarProperty Name="BalconyNumber" ColumnName="BalconyNumber" />
-                <ScalarProperty Name="PrivatePlot" ColumnName="PrivatePlot" />
-                <ScalarProperty Name="AdditionalBuildings" ColumnName="AdditionalBuildings" />
-                <ScalarProperty Name="Cost" ColumnName="Cost" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="AdditionalBuildings" ColumnName="AdditionalBuildings" />
+                <ScalarProperty Name="PrivatePlot" ColumnName="PrivatePlot" />
+                <ScalarProperty Name="BalconyNumber" ColumnName="BalconyNumber" />
+                <ScalarProperty Name="LoggiaNumber" ColumnName="LoggiaNumber" />
+                <ScalarProperty Name="BuildingTypeID" ColumnName="BuildingTypeID" />
+                <ScalarProperty Name="EstateTypeID" ColumnName="EstateTypeID" />
+                <ScalarProperty Name="FloorNumber" ColumnName="FloorNumber" />
+                <ScalarProperty Name="Floor" ColumnName="Floor" />
+                <ScalarProperty Name="KitchenArea" ColumnName="KitchenArea" />
+                <ScalarProperty Name="TotalArea" ColumnName="TotalArea" />
+                <ScalarProperty Name="RoomNumber" ColumnName="RoomNumber" />
+                <ScalarProperty Name="DistrictID" ColumnName="DistrictID" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EstateTypes">
             <EntityTypeMapping TypeName="EstateAgencyModel.EstateType">
               <MappingFragment StoreEntitySet="EstateTypes">
-                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Feedbacks">
             <EntityTypeMapping TypeName="EstateAgencyModel.Feedback">
               <MappingFragment StoreEntitySet="Feedback">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Comment" ColumnName="Comment" />
-                <ScalarProperty Name="VisitDate" ColumnName="VisitDate" />
-                <ScalarProperty Name="EstateID" ColumnName="EstateID" />
                 <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="EstateID" ColumnName="EstateID" />
+                <ScalarProperty Name="VisitDate" ColumnName="VisitDate" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -980,29 +988,21 @@
               <MappingFragment StoreEntitySet="MultiFloorBuildingType">
                 <ScalarProperty Name="Max" ColumnName="Max" />
                 <ScalarProperty Name="Min" ColumnName="Min" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Requirements">
             <EntityTypeMapping TypeName="EstateAgencyModel.Requirement">
               <MappingFragment StoreEntitySet="Requirements">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
-                <ScalarProperty Name="DistrictID" ColumnName="DistrictID" />
-                <ScalarProperty Name="EstateTypeID" ColumnName="EstateTypeID" />
-                <ScalarProperty Name="MultiFloorBuildingTypeID" ColumnName="MultiFloorBuildingTypeID" />
-                <ScalarProperty Name="RoomNumber" ColumnName="RoomNumber" />
-                <ScalarProperty Name="MinimalFloor" ColumnName="MinimalFloor" />
                 <ScalarProperty Name="MaximalFloor" ColumnName="MaximalFloor" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BuildingTypes">
-            <EntityTypeMapping TypeName="EstateAgencyModel.BuildingType">
-              <MappingFragment StoreEntitySet="BuildingType">
-                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MinimalFloor" ColumnName="MinimalFloor" />
+                <ScalarProperty Name="RoomNumber" ColumnName="RoomNumber" />
+                <ScalarProperty Name="MultiFloorBuildingTypeID" ColumnName="MultiFloorBuildingTypeID" />
+                <ScalarProperty Name="EstateTypeID" ColumnName="EstateTypeID" />
+                <ScalarProperty Name="DistrictID" ColumnName="DistrictID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -31,6 +31,7 @@ namespace EstateAgency
         public Nullable<int> Floor { get; set; }
         public int FloorNumber { get; set; }
         public Nullable<int> EstateTypeID { get; set; }
+        public Nullable<int> BuildingTypeID { get; set; }
         public Nullable<int> LoggiaNumber { get; set; }
         public Nullable<int> BalconyNumber { get; set; }
         public string PrivatePlot { get; set; }
@@ -38,15 +39,14 @@ namespace EstateAgency
         public decimal Cost { get; set; }
         public System.DateTime Date { get; set; }
         public int BranchID { get; set; }
-        public Nullable<int> BuildingTypeID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Agreement> Agreements { get; set; }
         public virtual Branch Branch { get; set; }
+        public virtual BuildingType BuildingType { get; set; }
         public virtual District District { get; set; }
         public virtual EstateType EstateType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Feedback> Feedbacks { get; set; }
-        public virtual BuildingType BuildingType { get; set; }
     }
 }

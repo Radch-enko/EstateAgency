@@ -1,4 +1,5 @@
-﻿using EstateAgency.Navigation;
+﻿using EstateAgency.Common;
+using EstateAgency.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,11 +24,15 @@ namespace EstateAgency.Screens.Clients
     {
         Client newClient = new Client();
         EstateAgencyEntities entities = EstateAgencyEntities.GetContext();
-        public CreateNewClient(User authorizedEmployer)
+        User employer;
+        public CreateNewClient()
         {
             InitializeComponent();
             DataContext = newClient;
-            newClient.BranchID = authorizedEmployer.BranchID;
+            newClient.BranchID = AuthorizedEmployer.user.BranchID;
+            employer = AuthorizedEmployer.user;
+
+            //Navigator.frame.Navigate(new Estates.CreateNewEstate(employer));
         }
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
@@ -42,7 +47,9 @@ namespace EstateAgency.Screens.Clients
                  DateIssuePicker.SelectedDate == null ||
                  String.IsNullOrEmpty(DivisionCodeTextBox.Text) ||
                  String.IsNullOrEmpty(RegistrationTextBox.Text) ||
-                 String.IsNullOrEmpty(PhoneTextBox.Text))
+                 String.IsNullOrEmpty(PhoneTextBox.Text) ||
+                 (WantToBuyRadioButton.IsChecked == false && WantToStoreRadioButton.IsChecked == false)
+                 )
                 {
                     _ = MessageBox.Show("Заполните обязательные поля!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
@@ -50,14 +57,25 @@ namespace EstateAgency.Screens.Clients
                 {
                     entities.Clients.Add(newClient);
                     entities.SaveChanges();
-                    MessageBox.Show("Данные успешно сохранены", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
-                    Navigator.frame.GoBack();
+
+                    if (WantToBuyRadioButton.IsChecked.Value)
+                    {
+                        Navigator.frame.Navigate(new Requirements.CreateRequirements(newClient));
+                    }
+                    else if (WantToStoreRadioButton.IsChecked.Value)
+                    {
+                        Navigator.frame.Navigate(new Estates.CreateNewEstate());
+                    }
                 }
 
             }
             catch (Exception exception)
             {
                 _ = MessageBox.Show(exception.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                foreach (var dataItem in exception.Data.Values)
+                {
+                    Console.WriteLine(dataItem.ToString());
+                }
             }
         }
     }

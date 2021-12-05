@@ -25,7 +25,7 @@ namespace EstateAgency
         public string Name { get; set; }
         public string Surname { get; set; }
         public string MiddleName { get; set; }
-        public string PassportSeries { get; set; }
+        public Nullable<int> PassportSeries { get; set; }
         public int PassportNumber { get; set; }
         public string IssuedByWhom { get; set; }
         public System.DateTime DateOfIssue { get; set; }

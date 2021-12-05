@@ -1,4 +1,5 @@
-﻿using EstateAgency.Navigation;
+﻿using EstateAgency.Common;
+using EstateAgency.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,17 +22,11 @@ namespace EstateAgency.Screens.Menu
     /// </summary>
     public partial class Menu : Page
     {
-        User employer;
-        public Menu(User authorizedUser)
+        public Menu()
         {
             InitializeComponent();
-            employer = authorizedUser;
         }
 
-        private void CreateClientContract_Click(object sender, RoutedEventArgs e)
-        {
-            Navigator.frame.Navigate(new Estates.CreateNewEstate(employer));
-        }
 
         private void SearchEstate_Click(object sender, RoutedEventArgs e)
         {
@@ -45,7 +40,22 @@ namespace EstateAgency.Screens.Menu
 
         private void AddNewClient_Click(object sender, RoutedEventArgs e)
         {
-            Navigator.frame.Navigate(new Clients.CreateNewClient(employer));
+            Navigator.frame.Navigate(new Clients.CreateNewClient());
+        }
+
+        private void AddNewRequirement_Click(object sender, RoutedEventArgs e)
+        {
+            Navigator.frame.Navigate(new Requirements.CreateRequirements());
+        }
+
+        private void AddNewEstate_Click(object sender, RoutedEventArgs e)
+        {
+            Navigator.frame.Navigate(new Estates.CreateNewEstate());
+        }
+
+        private void ShowRequirements_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

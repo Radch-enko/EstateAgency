@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:EstateAgency.Screens.Clients"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="CreateNewClient"
+      Title="Оформление нового клиента"
       Background="White">
 
     <StackPanel Margin="15" Orientation="Horizontal" VerticalAlignment="Top">
@@ -27,7 +27,15 @@
             <Label Content="Адрес"/>
             <TextBox  x:Name="AddressTextBox" Text="{Binding Path=Address}" Width="200" HorizontalAlignment="Left"/>
 
-            <Button x:Name="ButtonSave" Content="Сохранить" Width="200" Height="25" Click="ButtonSave_Click" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,50,0,0"/>
+            <GroupBox Header="По какому поводу обращаетесь?*" HorizontalAlignment="Left" Margin="0 20 0 0">
+                <StackPanel>
+                    <RadioButton x:Name="WantToBuyRadioButton" GroupName="ClientRole" Content="Хочу купить недвижимость" Margin="0 20 0 0"/>
+                    <RadioButton x:Name="WantToStoreRadioButton" GroupName="ClientRole" Content="Хочу продать недвижимость" Margin="0 10 0 0"/>
+                </StackPanel>
+            </GroupBox>
+            
+
+            <Button x:Name="ButtonSave" Content="Далее" Width="200" Height="25" Click="ButtonSave_Click" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,50,0,0"/>
         </StackPanel>
         
         <GroupBox Header="Паспортные данные"  Width="300" HorizontalAlignment="Right" Padding="10">
@@ -49,6 +57,8 @@
 
                 <Label Content="Прописка*"/>
                 <TextBox  x:Name="RegistrationTextBox" Text="{Binding Path=Registration}" Width="200" HorizontalAlignment="Left"/>
+
+                <Label Content="Знаком * отмечены обязательные поля!" Margin="0 20 0 0" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
             </StackPanel>
         </GroupBox>
         

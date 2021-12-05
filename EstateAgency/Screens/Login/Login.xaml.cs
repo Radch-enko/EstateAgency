@@ -26,6 +26,7 @@ namespace EstateAgency.Screens.Login
         public Login()
         {
             InitializeComponent();
+            Navigator.frame.NavigationService.RemoveBackEntry();
             users = entities.Users;
             SetupTestCreds();
         }
@@ -41,7 +42,8 @@ namespace EstateAgency.Screens.Login
             IEnumerable<User> validEntries = users.ToList().Where(user => user.Login == LoginTextBox.Text && user.Password == PasswordTextBox.Text);
             if (validEntries.Count() == 1)
             {
-                _ = Navigator.frame.Navigate(new Menu.Menu(validEntries.FirstOrDefault()));
+                Common.AuthorizedEmployer.user = validEntries.FirstOrDefault();
+                _ = Navigator.frame.Navigate(new Menu.Menu());
             }
             else
             {

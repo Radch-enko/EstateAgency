@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="800"
-      Title="Create Estate Form"
+      Title="Добавление объекта недвижимости"
       Background="White">
 
     <UniformGrid Margin="15" Columns="2" Rows="1">
@@ -72,6 +72,7 @@
             </StackPanel>
             
             <Button x:Name="SaveEstate" Content="Сохранить" HorizontalAlignment="Left" Width="150" Height="40" Margin="0 20 0 0" Click="SaveEstate_Click"/>
+            <Label Content="Знаком * отмечены обязательные поля!" Margin="0 20 0 0" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
         </StackPanel>
     </UniformGrid>
     

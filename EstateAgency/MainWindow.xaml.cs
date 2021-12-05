@@ -27,5 +27,28 @@ namespace EstateAgency
             Navigator.frame = MainContainer;
             Navigator.frame.Navigate(new Screens.Login.Login());
         }
+
+        private void MainContainer_LoadCompleted(object sender, NavigationEventArgs e)
+        {
+            Frame frame = sender as Frame;
+            String pageTitle = (frame.Content as Page).Title;
+            AppTitle.Content = pageTitle;
+            if (Navigator.frame.CanGoBack)
+            {
+                ButtonReturn.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                ButtonReturn.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void ButtonReturn_Click(object sender, RoutedEventArgs e)
+        {
+            if (Navigator.frame.CanGoBack)
+            {
+                Navigator.frame.GoBack();
+            }
+        }
     }
 }

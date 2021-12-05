@@ -1,4 +1,5 @@
-﻿using EstateAgency.Navigation;
+﻿using EstateAgency.Common;
+using EstateAgency.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,11 +25,21 @@ namespace EstateAgency.Screens.Estates
         Estate estate = new Estate();
         EstateAgencyEntities entities = EstateAgencyEntities.GetContext();
 
-        public CreateNewEstate(User authorizedEmployer)
+        public CreateNewEstate()
         {
             InitializeComponent();
-            estate.BranchID = authorizedEmployer.BranchID;
+            estate.BranchID = AuthorizedEmployer.user.BranchID;
             estate.Date = DateTime.Now;
+            DataContext = estate;
+            SetupPickers();
+        }
+
+        public CreateNewEstate(Client createdClient)
+        {
+            InitializeComponent();
+            estate.BranchID = AuthorizedEmployer.user.BranchID;
+            estate.Date = DateTime.Now;
+            estate.OwnerID = createdClient.ID;
             DataContext = estate;
             SetupPickers();
         }
@@ -55,8 +66,8 @@ namespace EstateAgency.Screens.Estates
                 {
                     entities.Estates.Add(estate);
                     entities.SaveChanges();
-                    MessageBox.Show("Данные успешно сохранены", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
-                    Navigator.frame.GoBack();
+                    MessageBox.Show("Недвижимость добавлена", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
+                    Navigator.frame.Navigate(new Menu.Menu());
                 }
                 else
                 {
