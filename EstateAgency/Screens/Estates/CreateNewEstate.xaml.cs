@@ -34,12 +34,24 @@ namespace EstateAgency.Screens.Estates
             SetupPickers();
         }
 
-        public CreateNewEstate(Client createdClient)
+        public CreateNewEstate(Client createdOwner)
         {
             InitializeComponent();
             estate.BranchID = AuthorizedEmployer.user.BranchID;
             estate.Date = DateTime.Now;
-            estate.OwnerID = createdClient.ID;
+            estate.OwnerID = createdOwner.ID;
+            DataContext = estate;
+            SetupPickers();
+        }
+
+        public CreateNewEstate(Estate wantoToOpenEstate)
+        {
+            InitializeComponent();
+
+            if (wantoToOpenEstate != null)
+            {
+                estate = wantoToOpenEstate;
+            }
             DataContext = estate;
             SetupPickers();
         }
@@ -47,9 +59,16 @@ namespace EstateAgency.Screens.Estates
         private void SetupPickers()
         {
             EstateTypePicker.ItemsSource = entities.EstateTypes.ToList();
+            EstateTypePicker.SelectedItem = estate.EstateType;
+
             BuildingTypePicker.ItemsSource = entities.BuildingTypes.ToList();
+            BuildingTypePicker.SelectedItem = estate.BuildingType;
+
             DistrictPicker.ItemsSource = entities.Districts.ToList();
+            DistrictPicker.SelectedItem = estate.District;
+
             OwnerPicker.ItemsSource = entities.Clients.ToList();
+            OwnerPicker.SelectedItem = entities.Clients.Where(client => client.ID == estate.OwnerID).FirstOrDefault();
         }
 
         private void SaveEstate_Click(object sender, RoutedEventArgs e)
@@ -64,9 +83,13 @@ namespace EstateAgency.Screens.Estates
                FloorNumberTextBox.Text != "" &&
                CostTextBox.Text != "")
                 {
-                    entities.Estates.Add(estate);
+                    if (estate.ID == 0)
+                    {
+                        entities.Estates.Add(estate);
+                    }
+
                     entities.SaveChanges();
-                    MessageBox.Show("Недвижимость добавлена", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Недвижимость сохранена", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
                     Navigator.frame.Navigate(new Menu.Menu());
                 }
                 else
@@ -89,16 +112,35 @@ namespace EstateAgency.Screens.Estates
             {
                 case 1:
                     KitchenAreaContainer.Visibility = Visibility.Hidden;
+                    KicthenAreaTextBox.Text = null;
+
                     FloorFieldContainer.Visibility = Visibility.Hidden;
+                    FloorNumberTextBox.Text = null;
+
                     RoomFieldContainer.Visibility = Visibility.Hidden;
+                    RoomNumberTextBox.Text = null;
+
                     BuildingTypeContainer.Visibility = Visibility.Hidden;
+                    BuildingTypePicker.SelectedItem = null;
+
                     BalconyFieldsContainer.Visibility = Visibility.Hidden;
+                    BalconyNumberTextBox.Text = null;
+
+                    PrivatePlotFieldsContainer.Visibility = Visibility.Visible;
+                    PrivatePlotTextBox.Text = estate.PrivatePlot;
+
+                    AdditionalBuildingsFieldsContainer.Visibility = Visibility.Visible;
+                    AdditionalBuildingsTextBox.Text = estate.AdditionalBuildings;
 
                     TotalAreaLabel.Content = "Общая площадь (сот.)*";
                     break;
 
                 case 3:
                     KitchenAreaContainer.Visibility = Visibility.Hidden;
+                    KicthenAreaTextBox.Text = null;
+
+                    AdditionalBuildingsFieldsContainer.Visibility = Visibility.Visible;
+                    AdditionalBuildingsTextBox.Text = estate.AdditionalBuildings;
                     break;
                 default:
                     KitchenAreaContainer.Visibility = Visibility.Visible;
@@ -107,6 +149,12 @@ namespace EstateAgency.Screens.Estates
                     BuildingTypeContainer.Visibility = Visibility.Visible;
                     BalconyFieldsContainer.Visibility = Visibility.Visible;
                     TotalAreaLabel.Content = "Общая площадь м²*";
+
+                    PrivatePlotFieldsContainer.Visibility = Visibility.Hidden;
+                    PrivatePlotTextBox.Text = null;
+
+                    AdditionalBuildingsFieldsContainer.Visibility = Visibility.Hidden;
+                    AdditionalBuildingsTextBox.Text = null;
                     break;
             }
         }

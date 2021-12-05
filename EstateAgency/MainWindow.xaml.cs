@@ -33,7 +33,7 @@ namespace EstateAgency
             Frame frame = sender as Frame;
             String pageTitle = (frame.Content as Page).Title;
             AppTitle.Content = pageTitle;
-            if (Navigator.frame.CanGoBack)
+            if (Navigator.frame.CanGoBack && pageTitle != "Главное меню")
             {
                 ButtonReturn.Visibility = Visibility.Visible;
             }
@@ -45,10 +45,7 @@ namespace EstateAgency
 
         private void ButtonReturn_Click(object sender, RoutedEventArgs e)
         {
-            if (Navigator.frame.CanGoBack)
-            {
-                Navigator.frame.GoBack();
-            }
+            Navigator.frame.Navigate(new Screens.Menu.Menu());
         }
     }
 }

@@ -13,7 +13,7 @@
         <Button x:Name="AddNewRequirement" Content="Новое требование" Click="AddNewRequirement_Click" Margin="0 20 0 0"/>
         <Button x:Name="ShowRequirements" Content="Посмотреть требования к недвижимости" Click="ShowRequirements_Click" Margin="0 20 0 0"/>
         <Button x:Name="AddNewEstate" Content="Новая недвижимость" Click="AddNewEstate_Click"  Margin="0 20 0 0"/>
-        <Button x:Name="SearchEstate" Content="Поиск недвижимости" Margin="0 20 0 0" Click="SearchEstate_Click"/>
+        <Button x:Name="SearchEstate" Content="Подобрать объект недвижимости" Margin="0 20 0 0" Click="SearchEstate_Click"/>
         <Button x:Name="ShowReports" Content="Отчеты" Margin="0 20 0 0" Click="ShowReports_Click"/>
     </StackPanel>
 </Page>

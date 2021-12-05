@@ -118,6 +118,9 @@
     <Compile Include="Screens\Estates\CreateNewEstate.xaml.cs">
       <DependentUpon>CreateNewEstate.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Screens\Estates\SearchEstate.xaml.cs">
+      <DependentUpon>SearchEstate.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Screens\Login\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
@@ -157,6 +160,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Screens\Estates\CreateNewEstate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Estates\SearchEstate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

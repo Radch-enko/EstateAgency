@@ -12,7 +12,7 @@
             <Label Name="AppTitle" Content="Заголовок страницы" FontSize="22" VerticalAlignment="Center"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" Height="50" HorizontalAlignment="Right" Margin="15">
-            <Button x:Name="ButtonReturn" Click="ButtonReturn_Click" Content="Назад" Width="150" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <Button x:Name="ButtonReturn" Click="ButtonReturn_Click" Content="В главное меню" Width="150" VerticalAlignment="Center" HorizontalAlignment="Right"/>
         </StackPanel>
         <Frame x:Name="MainContainer" NavigationUIVisibility="Hidden" LoadCompleted="MainContainer_LoadCompleted"/>
     </DockPanel>

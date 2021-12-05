@@ -30,7 +30,7 @@ namespace EstateAgency.Screens.Menu
 
         private void SearchEstate_Click(object sender, RoutedEventArgs e)
         {
-
+            Navigator.frame.Navigate(new Estates.SearchEstate());
         }
 
         private void ShowReports_Click(object sender, RoutedEventArgs e)
