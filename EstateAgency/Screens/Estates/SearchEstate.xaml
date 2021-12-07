@@ -41,7 +41,7 @@
                 <DataGridTextColumn Header="Тип недвижимости" Binding="{Binding Path=EstateType.Name}" Width="*"/>
                 <DataGridTextColumn Header="Адрес" Binding="{Binding Path=Address}" Width="*"/>
                 <DataGridTextColumn Header="Район" Binding="{Binding Path=District.Name}" Width="*"/>
-                <DataGridTextColumn Header="Общая площадь" Binding="{Binding Path=TotalArea}" Width="*"/>
+                <DataGridTextColumn Header="Общая площадь" Binding="{Binding Path=DisplayTotalArea}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

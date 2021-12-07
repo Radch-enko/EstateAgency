@@ -94,9 +94,9 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Comment" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Comment" Type="varchar" MaxLength="1000" Nullable="false" />
           <Property Name="VisitDate" Type="date" Nullable="false" />
-          <Property Name="EstateID" Type="int" />
+          <Property Name="EstateID" Type="int" Nullable="false" />
           <Property Name="ClientID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="MultiFloorBuildingType">
@@ -260,7 +260,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Feedback_Estates">
-          <End Role="Estates" Type="Self.Estates" Multiplicity="0..1" />
+          <End Role="Estates" Type="Self.Estates" Multiplicity="1" />
           <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Estates">
@@ -472,7 +472,7 @@
             <End Role="Client" EntitySet="Clients" />
             <End Role="Feedback" EntitySet="Feedbacks" />
           </AssociationSet>
-          <AssociationSet Name="FK_Requirements_Clients" Association="EstateAgencyModel.FK_Requirements_Clients">
+          <AssociationSet Name="FK_Requirements_Clients1" Association="EstateAgencyModel.FK_Requirements_Clients1">
             <End Role="Client" EntitySet="Clients" />
             <End Role="Requirement" EntitySet="Requirements" />
           </AssociationSet>
@@ -562,7 +562,7 @@
           <NavigationProperty Name="Clients1" Relationship="EstateAgencyModel.FK_Clients_Clients" FromRole="Client" ToRole="Client1" />
           <NavigationProperty Name="Client1" Relationship="EstateAgencyModel.FK_Clients_Clients" FromRole="Client1" ToRole="Client" />
           <NavigationProperty Name="Feedbacks" Relationship="EstateAgencyModel.FK_Feedback_Clients" FromRole="Client" ToRole="Feedback" />
-          <NavigationProperty Name="Requirements" Relationship="EstateAgencyModel.FK_Requirements_Clients" FromRole="Client" ToRole="Requirement" />
+          <NavigationProperty Name="Requirements" Relationship="EstateAgencyModel.FK_Requirements_Clients1" FromRole="Client" ToRole="Requirement" />
         </EntityType>
         <EntityType Name="District">
           <Key>
@@ -616,9 +616,9 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Comment" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Comment" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="VisitDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="EstateID" Type="Int32" />
+          <Property Name="EstateID" Type="Int32" Nullable="false" />
           <Property Name="ClientID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Client" Relationship="EstateAgencyModel.FK_Feedback_Clients" FromRole="Feedback" ToRole="Client" />
           <NavigationProperty Name="Estate" Relationship="EstateAgencyModel.FK_Feedback_Estates" FromRole="Feedback" ToRole="Estate" />
@@ -645,7 +645,7 @@
           <Property Name="RoomNumber" Type="Int32" />
           <Property Name="MinimalFloor" Type="Int32" />
           <Property Name="MaximalFloor" Type="Int32" />
-          <NavigationProperty Name="Client" Relationship="EstateAgencyModel.FK_Requirements_Clients" FromRole="Requirement" ToRole="Client" />
+          <NavigationProperty Name="Client" Relationship="EstateAgencyModel.FK_Requirements_Clients1" FromRole="Requirement" ToRole="Client" />
           <NavigationProperty Name="District" Relationship="EstateAgencyModel.FK_Requirements_Districts" FromRole="Requirement" ToRole="District" />
           <NavigationProperty Name="EstateType" Relationship="EstateAgencyModel.FK_Requirements_EstateTypes" FromRole="Requirement" ToRole="EstateType" />
           <NavigationProperty Name="MultiFloorBuildingType" Relationship="EstateAgencyModel.FK_Requirements_MultiFloorBuildingType" FromRole="Requirement" ToRole="MultiFloorBuildingType" />
@@ -779,7 +779,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Requirements_Clients">
+        <Association Name="FK_Requirements_Clients1">
           <End Type="EstateAgencyModel.Client" Role="Client" Multiplicity="1" />
           <End Type="EstateAgencyModel.Requirement" Role="Requirement" Multiplicity="*" />
           <ReferentialConstraint>
@@ -828,7 +828,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Feedback_Estates">
-          <End Type="EstateAgencyModel.Estate" Role="Estate" Multiplicity="0..1" />
+          <End Type="EstateAgencyModel.Estate" Role="Estate" Multiplicity="1" />
           <End Type="EstateAgencyModel.Feedback" Role="Feedback" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Estate">
@@ -875,7 +875,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>

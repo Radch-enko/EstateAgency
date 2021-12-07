@@ -8,12 +8,28 @@
       d:DesignHeight="1080" d:DesignWidth="1920"
       Title="Главное меню">
 
-    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Button x:Name="AddNewClient" Content="Новый клиент" Click="AddNewClient_Click" Margin="0 20 0 0"/>
-        <Button x:Name="AddNewRequirement" Content="Новое требование" Click="AddNewRequirement_Click" Margin="0 20 0 0"/>
-        <Button x:Name="ShowRequirements" Content="Посмотреть требования к недвижимости" Click="ShowRequirements_Click" Margin="0 20 0 0"/>
-        <Button x:Name="AddNewEstate" Content="Новая недвижимость" Click="AddNewEstate_Click"  Margin="0 20 0 0"/>
-        <Button x:Name="SearchEstate" Content="Подобрать объект недвижимости" Margin="0 20 0 0" Click="SearchEstate_Click"/>
-        <Button x:Name="ShowReports" Content="Отчеты" Margin="0 20 0 0" Click="ShowReports_Click"/>
-    </StackPanel>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Width="200" Height="50" x:Name="AddNewClient" Content="Новый клиент" Click="AddNewClient_Click" Margin="0 20 0 0"/>
+            <Button Width="200" Height="50" x:Name="AddNewRequirement" Content="Новое требование" Click="AddNewRequirement_Click" Margin="0 20 0 0"/>
+            <Button Width="200" Height="50" x:Name="AddNewEstate" Content="Новая недвижимость" Click="AddNewEstate_Click"  Margin="0 20 0 0"/>
+            <Button Width="200" Height="50" x:Name="CreateAgreement" Content="Сформировать договор купли/продажи" Margin="0 20 0 0" Click="CreateAgreement_Click" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Button Width="200" Height="50" Name="AddFeedback" Content="Добавить отзыв на недвижимость" Margin="0 20 0 0" Click="AddFeedback_Click"/>
+        </StackPanel>
+
+
+        <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Width="200" Height="50" Grid.Column="1" Grid.Row="0" x:Name="ShowRequirements" Content="Посмотреть требования к недвижимости" Click="ShowRequirements_Click" Margin="0 20 0 0"/>
+            <Button Width="200" Height="50" Grid.Column="1" Grid.Row="0" x:Name="SearchEstate" Content="Подобрать объект недвижимости" Margin="0 20 0 0" Click="SearchEstate_Click"/>
+            <Button Width="200" Height="50" Grid.Column="1" Grid.Row="0" x:Name="ShowReports" Content="Отчеты" Margin="0 20 0 0" Click="ShowReports_Click"/>
+        </StackPanel>
+    </Grid>
 </Page>

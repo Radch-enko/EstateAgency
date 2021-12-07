@@ -35,7 +35,7 @@ namespace EstateAgency.Screens.Menu
 
         private void ShowReports_Click(object sender, RoutedEventArgs e)
         {
-
+            Navigator.frame.Navigate(new ReportsMenu.ReportsMenu());
         }
 
         private void AddNewClient_Click(object sender, RoutedEventArgs e)
@@ -56,6 +56,16 @@ namespace EstateAgency.Screens.Menu
         private void ShowRequirements_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void CreateAgreement_Click(object sender, RoutedEventArgs e)
+        {
+            Navigator.frame.Navigate(new Agreements.CreateAgreement());
+        }
+
+        private void AddFeedback_Click(object sender, RoutedEventArgs e)
+        {
+            Navigator.frame.Navigate(new FeedbackForm.CreateFeedback());
         }
     }
 }

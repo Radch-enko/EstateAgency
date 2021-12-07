@@ -116,6 +116,7 @@ namespace EstateAgency.Screens.Estates
 
                     FloorFieldContainer.Visibility = Visibility.Hidden;
                     FloorNumberTextBox.Text = null;
+                    FloorTextBox.Text = null;
 
                     RoomFieldContainer.Visibility = Visibility.Hidden;
                     RoomNumberTextBox.Text = null;
@@ -125,12 +126,13 @@ namespace EstateAgency.Screens.Estates
 
                     BalconyFieldsContainer.Visibility = Visibility.Hidden;
                     BalconyNumberTextBox.Text = null;
+                    LoqqiaNumberTextBox.Text = null;
 
                     PrivatePlotFieldsContainer.Visibility = Visibility.Visible;
-                    PrivatePlotTextBox.Text = estate.PrivatePlot;
+                    PrivatePlotTextBox.Text = null;
 
-                    AdditionalBuildingsFieldsContainer.Visibility = Visibility.Visible;
-                    AdditionalBuildingsTextBox.Text = estate.AdditionalBuildings;
+                    AdditionalBuildingsFieldsContainer.Visibility = Visibility.Hidden;
+                    AdditionalBuildingsTextBox.Text = null;
 
                     TotalAreaLabel.Content = "Общая площадь (сот.)*";
                     break;
@@ -150,11 +152,11 @@ namespace EstateAgency.Screens.Estates
                     BalconyFieldsContainer.Visibility = Visibility.Visible;
                     TotalAreaLabel.Content = "Общая площадь м²*";
 
-                    PrivatePlotFieldsContainer.Visibility = Visibility.Hidden;
-                    PrivatePlotTextBox.Text = null;
+                    PrivatePlotFieldsContainer.Visibility = Visibility.Visible;
+                    PrivatePlotTextBox.Text = estate.PrivatePlot;
 
-                    AdditionalBuildingsFieldsContainer.Visibility = Visibility.Hidden;
-                    AdditionalBuildingsTextBox.Text = null;
+                    AdditionalBuildingsFieldsContainer.Visibility = Visibility.Visible;
+                    AdditionalBuildingsTextBox.Text = estate.AdditionalBuildings;
                     break;
             }
         }

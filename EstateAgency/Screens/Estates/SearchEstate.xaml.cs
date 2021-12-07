@@ -30,23 +30,45 @@ namespace EstateAgency.Screens.Estates
             DataContext = entities.Estates;
             FilteredEstatesDataGrid.ItemsSource = entities.Estates.ToList();
             ClientsDataGrid.ItemsSource = entities.Clients.ToList();
-        }
+            FilteredEstatesDataGrid.Items.Filter = new Predicate<object>(item =>
+            {
+                Estate estate = item as Estate;
+
+                var isNotSold = entities.Agreements.ToList().Where(agreement => agreement.EstateID == estate.ID).Count() == 0;
+
+                return isNotSold;
+            });
+    }
 
         private void ButtonEditEstate_Click(object sender, RoutedEventArgs e)
         {
             var selectedEstate = FilteredEstatesDataGrid.SelectedItem as Estate;
-            Navigator.frame.Navigate(new CreateNewEstate(selectedEstate));
+            if (selectedEstate!= null)
+            {
+                Navigator.frame.Navigate(new CreateNewEstate(selectedEstate));
+            }
+            else
+            {
+                _ = MessageBox.Show("Выберите объект недвижимости", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void ButtonDeleteEstate_Click(object sender, RoutedEventArgs e)
         {
-            var selectedEstate = FilteredEstatesDataGrid.SelectedItem as Estate;
             try
             {
-                entities.Estates.Remove(selectedEstate);
-                entities.SaveChanges();
-                MessageBox.Show("Объект удален", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
-                FilteredEstatesDataGrid.ItemsSource = entities.Estates.ToList();
+                var selectedEstate = FilteredEstatesDataGrid.SelectedItem as Estate;
+                if (selectedEstate != null)
+                {
+                    entities.Estates.Remove(selectedEstate);
+                    entities.SaveChanges();
+                    MessageBox.Show("Объект удален", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
+                    FilteredEstatesDataGrid.ItemsSource = entities.Estates.ToList();
+                }
+                else
+                {
+                    _ = MessageBox.Show("Выберите объект недвижимости", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
             catch (Exception exception)
             {
@@ -77,11 +99,14 @@ namespace EstateAgency.Screens.Estates
                             estate.Floor <= requirement.MultiFloorBuildingType.Max;
                         }
 
+                        var isNotSold = entities.Agreements.ToList().Where(agreement => agreement.EstateID == estate.ID).Count() == 0;
+
                         isValidEstate =
                         (requirement.DistrictID == estate.DistrictID || requirement.DistrictID == null) &&
                         (requirement.EstateTypeID == estate.EstateTypeID || requirement.EstateTypeID == null) &&
                         isFloorValid &&
-                        (requirement.RoomNumber == estate.RoomNumber || requirement.RoomNumber == null);
+                        (requirement.RoomNumber == estate.RoomNumber || requirement.RoomNumber == null) &&
+                        isNotSold;
                     }
 
                     return isValidEstate;

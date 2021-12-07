@@ -26,7 +26,7 @@
         <AssociationConnector Association="EstateAgencyModel.FK_Estates_BuildingType" />
         <AssociationConnector Association="EstateAgencyModel.FK_Clients_Clients" />
         <AssociationConnector Association="EstateAgencyModel.FK_Feedback_Clients" />
-        <AssociationConnector Association="EstateAgencyModel.FK_Requirements_Clients" />
+        <AssociationConnector Association="EstateAgencyModel.FK_Requirements_Clients1" />
         <AssociationConnector Association="EstateAgencyModel.FK_Estates_Districts" />
         <AssociationConnector Association="EstateAgencyModel.FK_Requirements_Districts" />
         <AssociationConnector Association="EstateAgencyModel.FK_Estates_EstateTypes" />

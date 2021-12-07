@@ -103,6 +103,7 @@
     </Compile>
     <Compile Include="Extensions\ClientExtensions.cs" />
     <Compile Include="Extensions\DatabaseContext.cs" />
+    <Compile Include="Extensions\EstateExtension.cs" />
     <Compile Include="Feedback.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
@@ -111,6 +112,9 @@
     </Compile>
     <Compile Include="Requirement.cs">
       <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Agreements\CreateAgreement.xaml.cs">
+      <DependentUpon>CreateAgreement.xaml</DependentUpon>
     </Compile>
     <Compile Include="Screens\Clients\CreateNewClient.xaml.cs">
       <DependentUpon>CreateNewClient.xaml</DependentUpon>
@@ -121,11 +125,17 @@
     <Compile Include="Screens\Estates\SearchEstate.xaml.cs">
       <DependentUpon>SearchEstate.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Screens\Feedback\CreateFeedback.xaml.cs">
+      <DependentUpon>CreateFeedback.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Screens\Login\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
     <Compile Include="Screens\Menu\Menu.xaml.cs">
       <DependentUpon>Menu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\ReportsMenu\ReportsMenu.xaml.cs">
+      <DependentUpon>ReportsMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Screens\Requirements\CreateRequirements.xaml.cs">
       <DependentUpon>CreateRequirements.xaml</DependentUpon>
@@ -155,6 +165,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Screens\Agreements\CreateAgreement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Screens\Clients\CreateNewClient.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -167,11 +181,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Screens\Feedback\CreateFeedback.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Screens\Login\Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Screens\Menu\Menu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\ReportsMenu\ReportsMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

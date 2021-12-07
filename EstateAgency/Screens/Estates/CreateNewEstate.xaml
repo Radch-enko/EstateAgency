@@ -13,6 +13,9 @@
             <Label Content="Продавец*" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             <ComboBox x:Name="OwnerPicker" SelectionChanged="OwnerPicker_SelectionChanged" DisplayMemberPath="DisplayName" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200"/>
 
+            <Label Content="Тип недвижимости"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <ComboBox x:Name="EstateTypePicker" SelectionChanged="EstateTypePicker_SelectionChanged" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" DisplayMemberPath="Name" />
+
             <Label Content="Адрес*" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             <TextBox Text="{Binding Address}" x:Name="AddressTextBox" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" />
 
@@ -39,9 +42,6 @@
                 <Label Content="Количество этажей в доме*" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <TextBox Text="{Binding FloorNumber}" x:Name="FloorNumberTextBox" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" TextChanged="FloorNumberTextBox_TextChanged" />
             </StackPanel>
-
-            <Label Content="Тип недвижимости"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <ComboBox x:Name="EstateTypePicker" SelectionChanged="EstateTypePicker_SelectionChanged" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" DisplayMemberPath="Name" />
 
             <StackPanel x:Name="BuildingTypeContainer">
                 <Label Content="Тип дома" HorizontalAlignment="Left" VerticalAlignment="Center"/>

@@ -17,7 +17,7 @@ namespace EstateAgency
         public int ID { get; set; }
         public string Comment { get; set; }
         public System.DateTime VisitDate { get; set; }
-        public Nullable<int> EstateID { get; set; }
+        public int EstateID { get; set; }
         public int ClientID { get; set; }
     
         public virtual Client Client { get; set; }
