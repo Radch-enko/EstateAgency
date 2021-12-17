@@ -38,5 +38,6 @@ namespace EstateAgency
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UsersRole> UsersRoles { get; set; }
+        public virtual DbSet<EstatePriceLog> EstatePriceLogs { get; set; }
     }
 }

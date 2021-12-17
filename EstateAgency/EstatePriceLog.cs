@@ -12,17 +12,14 @@ namespace EstateAgency
     using System;
     using System.Collections.Generic;
     
-    public partial class Agreement
+    public partial class EstatePriceLog
     {
         public int ID { get; set; }
-        public int BuyerID { get; set; }
         public int EstateID { get; set; }
-        public System.DateTime Date { get; set; }
-        public decimal Cost { get; set; }
-        public int BranchID { get; set; }
+        public decimal OldCost { get; set; }
+        public decimal NewCost { get; set; }
+        public System.DateTime ChangeDate { get; set; }
     
-        public virtual Branch Branch { get; set; }
         public virtual Estate Estate { get; set; }
-        public virtual Client Client { get; set; }
     }
 }

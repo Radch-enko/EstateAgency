@@ -98,6 +98,9 @@
     <Compile Include="Estate.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
+    <Compile Include="EstatePriceLog.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
     <Compile Include="EstateType.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>

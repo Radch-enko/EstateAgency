@@ -59,6 +59,16 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="EstatePriceLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EstateID" Type="int" Nullable="false" />
+          <Property Name="OldCost" Type="money" Nullable="false" />
+          <Property Name="NewCost" Type="money" Nullable="false" />
+          <Property Name="ChangeDate" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="Estates">
           <Key>
             <PropertyRef Name="ID" />
@@ -163,6 +173,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Agreements_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Agreements" Type="Self.Agreements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Agreements">
+              <PropertyRef Name="BuyerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Agreements_Estates">
           <End Role="Estates" Type="Self.Estates" Multiplicity="1" />
           <End Role="Agreements" Type="Self.Agreements" Multiplicity="*" />
@@ -187,15 +209,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Clients_Clients">
-          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
-          <End Role="Clients1" Type="Self.Clients" Multiplicity="0..1" />
+        <Association Name="FK_EstatePriceLog_Estates">
+          <End Role="Estates" Type="Self.Estates" Multiplicity="1" />
+          <End Role="EstatePriceLog" Type="Self.EstatePriceLog" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Clients">
+            <Principal Role="Estates">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Clients1">
-              <PropertyRef Name="ID" />
+            <Dependent Role="EstatePriceLog">
+              <PropertyRef Name="EstateID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -349,6 +371,7 @@
           <EntitySet Name="BuildingType" EntityType="Self.BuildingType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Districts" EntityType="Self.Districts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstatePriceLog" EntityType="Self.EstatePriceLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Estates" EntityType="Self.Estates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EstateTypes" EntityType="Self.EstateTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
@@ -361,6 +384,10 @@
             <End Role="Branch" EntitySet="Branch" />
             <End Role="Agreements" EntitySet="Agreements" />
           </AssociationSet>
+          <AssociationSet Name="FK_Agreements_Clients" Association="Self.FK_Agreements_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Agreements" EntitySet="Agreements" />
+          </AssociationSet>
           <AssociationSet Name="FK_Agreements_Estates" Association="Self.FK_Agreements_Estates">
             <End Role="Estates" EntitySet="Estates" />
             <End Role="Agreements" EntitySet="Agreements" />
@@ -369,9 +396,9 @@
             <End Role="Branch" EntitySet="Branch" />
             <End Role="Clients" EntitySet="Clients" />
           </AssociationSet>
-          <AssociationSet Name="FK_Clients_Clients" Association="Self.FK_Clients_Clients">
-            <End Role="Clients" EntitySet="Clients" />
-            <End Role="Clients1" EntitySet="Clients" />
+          <AssociationSet Name="FK_EstatePriceLog_Estates" Association="Self.FK_EstatePriceLog_Estates">
+            <End Role="Estates" EntitySet="Estates" />
+            <End Role="EstatePriceLog" EntitySet="EstatePriceLog" />
           </AssociationSet>
           <AssociationSet Name="FK_Estates_Branch" Association="Self.FK_Estates_Branch">
             <End Role="Branch" EntitySet="Branch" />
@@ -504,6 +531,15 @@
             <End Role="UsersRole" EntitySet="UsersRoles" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
+          <EntitySet Name="EstatePriceLogs" EntityType="EstateAgencyModel.EstatePriceLog" />
+          <AssociationSet Name="FK_EstatePriceLog_Estates" Association="EstateAgencyModel.FK_EstatePriceLog_Estates">
+            <End Role="Estate" EntitySet="Estates" />
+            <End Role="EstatePriceLog" EntitySet="EstatePriceLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agreements_Clients" Association="EstateAgencyModel.FK_Agreements_Clients">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Agreement" EntitySet="Agreements" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Agreement">
           <Key>
@@ -517,6 +553,7 @@
           <Property Name="BranchID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Branch" Relationship="EstateAgencyModel.FK_Agreements_Branch" FromRole="Agreement" ToRole="Branch" />
           <NavigationProperty Name="Estate" Relationship="EstateAgencyModel.FK_Agreements_Estates" FromRole="Agreement" ToRole="Estate" />
+          <NavigationProperty Name="Client" Relationship="EstateAgencyModel.FK_Agreements_Clients" FromRole="Agreement" ToRole="Client" />
         </EntityType>
         <EntityType Name="Branch">
           <Key>
@@ -563,6 +600,7 @@
           <NavigationProperty Name="Client1" Relationship="EstateAgencyModel.FK_Clients_Clients" FromRole="Client1" ToRole="Client" />
           <NavigationProperty Name="Feedbacks" Relationship="EstateAgencyModel.FK_Feedback_Clients" FromRole="Client" ToRole="Feedback" />
           <NavigationProperty Name="Requirements" Relationship="EstateAgencyModel.FK_Requirements_Clients1" FromRole="Client" ToRole="Requirement" />
+          <NavigationProperty Name="Agreements" Relationship="EstateAgencyModel.FK_Agreements_Clients" FromRole="Client" ToRole="Agreement" />
         </EntityType>
         <EntityType Name="District">
           <Key>
@@ -601,6 +639,7 @@
           <NavigationProperty Name="District" Relationship="EstateAgencyModel.FK_Estates_Districts" FromRole="Estate" ToRole="District" />
           <NavigationProperty Name="EstateType" Relationship="EstateAgencyModel.FK_Estates_EstateTypes" FromRole="Estate" ToRole="EstateType" />
           <NavigationProperty Name="Feedbacks" Relationship="EstateAgencyModel.FK_Feedback_Estates" FromRole="Estate" ToRole="Feedback" />
+          <NavigationProperty Name="EstatePriceLogs" Relationship="EstateAgencyModel.FK_EstatePriceLog_Estates" FromRole="Estate" ToRole="EstatePriceLog" />
         </EntityType>
         <EntityType Name="EstateType">
           <Key>
@@ -875,6 +914,41 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="EstatePriceLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EstateID" Type="Int32" Nullable="false" />
+          <Property Name="OldCost" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="NewCost" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="ChangeDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Estate" Relationship="EstateAgencyModel.FK_EstatePriceLog_Estates" FromRole="EstatePriceLog" ToRole="Estate" />
+        </EntityType>
+        <Association Name="FK_EstatePriceLog_Estates">
+          <End Type="EstateAgencyModel.Estate" Role="Estate" Multiplicity="1" />
+          <End Type="EstateAgencyModel.EstatePriceLog" Role="EstatePriceLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estate">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EstatePriceLog">
+              <PropertyRef Name="EstateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agreements_Clients">
+          <End Type="EstateAgencyModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="EstateAgencyModel.Agreement" Role="Agreement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Agreement">
+              <PropertyRef Name="BuyerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1036,6 +1110,17 @@
             <EntityTypeMapping TypeName="EstateAgencyModel.UsersRole">
               <MappingFragment StoreEntitySet="UsersRoles">
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstatePriceLogs">
+            <EntityTypeMapping TypeName="EstateAgencyModel.EstatePriceLog">
+              <MappingFragment StoreEntitySet="EstatePriceLog">
+                <ScalarProperty Name="ChangeDate" ColumnName="ChangeDate" />
+                <ScalarProperty Name="NewCost" ColumnName="NewCost" />
+                <ScalarProperty Name="OldCost" ColumnName="OldCost" />
+                <ScalarProperty Name="EstateID" ColumnName="EstateID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

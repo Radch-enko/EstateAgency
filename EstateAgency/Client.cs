@@ -19,6 +19,7 @@ namespace EstateAgency
         {
             this.Feedbacks = new HashSet<Feedback>();
             this.Requirements = new HashSet<Requirement>();
+            this.Agreements = new HashSet<Agreement>();
         }
     
         public int ID { get; set; }
@@ -42,5 +43,7 @@ namespace EstateAgency
         public virtual ICollection<Feedback> Feedbacks { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Requirement> Requirements { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Agreement> Agreements { get; set; }
     }
 }

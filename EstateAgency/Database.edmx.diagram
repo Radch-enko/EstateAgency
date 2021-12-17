@@ -34,6 +34,9 @@
         <AssociationConnector Association="EstateAgencyModel.FK_Requirements_EstateTypes" />
         <AssociationConnector Association="EstateAgencyModel.FK_Requirements_MultiFloorBuildingType" />
         <AssociationConnector Association="EstateAgencyModel.FK_Users_UsersRoles" />
+        <EntityTypeShape EntityType="EstateAgencyModel.EstatePriceLog" Width="1.5" PointX="5.25" PointY="2.75" />
+        <AssociationConnector Association="EstateAgencyModel.FK_EstatePriceLog_Estates" />
+        <AssociationConnector Association="EstateAgencyModel.FK_Agreements_Clients" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

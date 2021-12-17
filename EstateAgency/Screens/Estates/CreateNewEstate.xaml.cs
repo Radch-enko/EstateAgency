@@ -144,6 +144,7 @@ namespace EstateAgency.Screens.Estates
                     AdditionalBuildingsFieldsContainer.Visibility = Visibility.Visible;
                     AdditionalBuildingsTextBox.Text = estate.AdditionalBuildings;
                     break;
+
                 default:
                     KitchenAreaContainer.Visibility = Visibility.Visible;
                     FloorFieldContainer.Visibility = Visibility.Visible;
@@ -155,8 +156,11 @@ namespace EstateAgency.Screens.Estates
                     PrivatePlotFieldsContainer.Visibility = Visibility.Visible;
                     PrivatePlotTextBox.Text = estate.PrivatePlot;
 
-                    AdditionalBuildingsFieldsContainer.Visibility = Visibility.Visible;
-                    AdditionalBuildingsTextBox.Text = estate.AdditionalBuildings;
+                    AdditionalBuildingsFieldsContainer.Visibility = Visibility.Hidden;
+                    AdditionalBuildingsTextBox.Text = null;
+
+                    PrivatePlotFieldsContainer.Visibility = Visibility.Hidden;
+                    PrivatePlotTextBox.Text = null;
                     break;
             }
         }

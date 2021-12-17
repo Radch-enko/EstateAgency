@@ -20,9 +20,12 @@ namespace EstateAgency.Screens.ReportsMenu
     /// </summary>
     public partial class ReportsMenu : Page
     {
+        EstateAgencyEntities entities = EstateAgencyEntities.GetContext();
         public ReportsMenu()
         {
             InitializeComponent();
+            PriceHistoryDataGrid.ItemsSource = entities.EstatePriceLogs.ToList();
+            AgreementsDataGrid.ItemsSource = entities.Agreements.ToList();
         }
     }
 }

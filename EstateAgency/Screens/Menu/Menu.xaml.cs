@@ -25,6 +25,14 @@ namespace EstateAgency.Screens.Menu
         public Menu()
         {
             InitializeComponent();
+            if (AuthorizedEmployer.user.UsersRole.Name == "Администратор")
+            {
+                ShowReports.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                ShowReports.Visibility = Visibility.Hidden;
+            }
         }
 
 
@@ -52,12 +60,6 @@ namespace EstateAgency.Screens.Menu
         {
             Navigator.frame.Navigate(new Estates.CreateNewEstate());
         }
-
-        private void ShowRequirements_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void CreateAgreement_Click(object sender, RoutedEventArgs e)
         {
             Navigator.frame.Navigate(new Agreements.CreateAgreement());

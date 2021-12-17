@@ -33,8 +33,8 @@ namespace EstateAgency.Screens.Login
 
         private void SetupTestCreds()
         {
-            LoginTextBox.Text = "mila8734";
-            PasswordTextBox.Text = "55ac8ed83";
+            LoginTextBox.Text = "marianna21121985";
+            PasswordTextBox.Text = "bc055aa0d";
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
